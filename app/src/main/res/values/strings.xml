@@ -1,3 +1,23 @@
 <resources>
-    <string name="app_name">LevyCCurves</string>
+    <string name="app_name">Levy C Curves</string>
+
+    <!-- Common use strings -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="edit">Edit Curve</string>
+    <string name="remove">Remove</string>
+
+    <!-- Edit page strings -->
+    <string name="get_color">Color</string>
+    <string name="get_x">Curve X start position</string>
+    <string name="get_y">Curve Y start position</string>
+    <string name="get_n">Number of iterations (N)</string>
+    <string name="get_rotation">Rotation</string>
+
+    <string name="hint_get_color">Pick color for a curve</string>
+    <string name="hint_get_x">Pick starting x position</string>
+    <string name="hint_get_y">Pick starting y position</string>
+    <string name="hint_get_n">Pick a number of curve iterations</string>
+    <string name="hint_get_rotation">Pick rotation of the curve</string>
 </resources>
