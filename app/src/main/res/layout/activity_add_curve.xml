@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_large">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:text="@string/add"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_header"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_n"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_creation" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etvN"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_get_n"
+                    android:textColorHint="@color/colorHintText" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_rotation"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_creation"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etvRotation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_get_rotation"
+                    android:textColorHint="@color/colorHintText" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_x"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_creation"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etvX"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_get_x"
+                    android:textColorHint="@color/colorHintText" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_y"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_creation"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etvY"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_get_y"
+                    android:textColorHint="@color/colorHintText" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_color"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_creation"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etvColor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_get_color"
+                    android:textColorHint="@color/colorHintText" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:background="@drawable/rounded_button"
+                android:text="@string/done"
+                android:textColor="@color/colorBrightText" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:background="@drawable/rounded_button"
+                android:text="@string/cancel"
+                android:textColor="@color/colorBrightText" />
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

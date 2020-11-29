@@ -74,7 +74,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             values.put(KEY_CURVE_X, curve.curveX);
             values.put(KEY_CURVE_Y, curve.curveY);
             values.put(KEY_CURVE_ROTATION, curve.curveRotation);
-            values.put(KEY_CURVE_COLOR, curve.cureveColor);
+            values.put(KEY_CURVE_COLOR, curve.curveColor);
 
             db.insertOrThrow(TABLE_CURVES, null, values);
             db.setTransactionSuccessful();
@@ -85,8 +85,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    public List<Curve> getAllPosts() {
-        List<Curve> curves = new ArrayList<>();
+    public ArrayList<Curve> getAllPosts() {
+        ArrayList<Curve> curves = new ArrayList<>();
         String TAG = "GET";
 
         String POSTS_SELECT_QUERY =
@@ -101,10 +101,10 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                     Curve newCurve = new Curve();
                     newCurve.curveId = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_ID));
                     newCurve.curveN = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_N));
-                    newCurve.curveX = cursor.getFloat(cursor.getColumnIndex(KEY_CURVE_X));
-                    newCurve.curveY = cursor.getFloat(cursor.getColumnIndex(KEY_CURVE_Y));
+                    newCurve.curveX = cursor.getDouble(cursor.getColumnIndex(KEY_CURVE_X));
+                    newCurve.curveY = cursor.getDouble(cursor.getColumnIndex(KEY_CURVE_Y));
                     newCurve.curveRotation = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_ROTATION));
-                    newCurve.cureveColor = cursor.getString(cursor.getColumnIndex(KEY_CURVE_COLOR));
+                    newCurve.curveColor = cursor.getString(cursor.getColumnIndex(KEY_CURVE_COLOR));
 
                     curves.add(newCurve);
                 } while(cursor.moveToNext());

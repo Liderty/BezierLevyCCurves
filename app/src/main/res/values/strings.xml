@@ -4,8 +4,10 @@
     <!-- Common use strings -->
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
 
     <string name="edit">Edit Curve</string>
+    <string name="add">Add Curve</string>
     <string name="remove">Remove</string>
 
     <!-- Edit page strings -->

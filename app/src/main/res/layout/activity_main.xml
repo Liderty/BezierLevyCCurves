@@ -6,13 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorAccent"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/graphicArea"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="720px"
+        android:layout_height="1080px"
+        android:background="@color/white"
         android:layout_margin="@dimen/margin_medium">
 
         <RelativeLayout
