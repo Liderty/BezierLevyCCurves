@@ -6,7 +6,7 @@
     <string name="cancel">Cancel</string>
     <string name="done">Done</string>
 
-    <string name="edit">Edit Curve</string>
+    <string name="edit">Edit</string>
     <string name="add">Add Curve</string>
     <string name="remove">Remove</string>
 
@@ -22,4 +22,5 @@
     <string name="hint_get_y">Pick starting y position</string>
     <string name="hint_get_n">Pick a number of curve iterations</string>
     <string name="hint_get_rotation">Pick rotation of the curve</string>
+    <string name="none">None</string>
 </resources>

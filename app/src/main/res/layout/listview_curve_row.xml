@@ -7,10 +7,10 @@
     android:background="@color/white">
 
     <TextView
-        android:id="@+id/taskDescription"
+        android:id="@+id/curveInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Id: 0, N: 15, X: 0.0, Y: 1.0, Rotation: 90"
+        android:text="@string/none"
         android:textSize="16sp"
         android:layout_margin="5dp"/>
 
@@ -24,20 +24,21 @@
         <CheckBox
             android:id="@+id/chbDraw"
             android:layout_width="wrap_content"
-            android:layout_weight="0.2"
+            android:layout_weight="0.6"
             android:layout_height="wrap_content"/>
 
-        <TextView
+        <Button
             android:id="@+id/btnEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_weight="0.4"
-            android:layout_margin="5dp"/>
+            android:layout_weight="0.2"
+            android:layout_margin="5dp"
+            android:focusable="false"/>
 
-        <TextView
+        <Button
             android:id="@+id/btnRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +51,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="5px"
+        android:layout_height="@dimen/margin_small"
         android:background="@color/colorPrimaryDark"/>
 
 </LinearLayout>

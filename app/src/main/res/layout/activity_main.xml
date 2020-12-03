@@ -17,10 +17,10 @@
         android:background="@color/white"
         android:layout_margin="@dimen/margin_medium">
 
-        <RelativeLayout
+        <TextView
             android:id="@+id/drowableArea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
@@ -41,6 +41,13 @@
         <Button
             android:id="@+id/btnAdd"
             android:text="Add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_large"/>
+
+        <Button
+            android:id="@+id/btnClear"
+            android:text="Clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

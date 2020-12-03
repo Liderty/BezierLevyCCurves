@@ -18,7 +18,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Table Names
-    private static final String TABLE_CURVES = "posts";
+    private static final String TABLE_CURVES = "curves";
 
     // Table Columns
     private static final String KEY_CURVE_ID = "id";
@@ -40,7 +40,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_POSTS_TABLE = "CREATE TABLE " + TABLE_CURVES +
+        String CREATE_CURVES_TABLE = "CREATE TABLE " + TABLE_CURVES +
                 "(" +
                 KEY_CURVE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + // Define a primary key
                 KEY_CURVE_N + " INTEGER" + "," +
@@ -50,7 +50,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 KEY_CURVE_COLOR + " VARCHAR(10)" +
                 ")";
 
-        db.execSQL(CREATE_POSTS_TABLE);
+        db.execSQL(CREATE_CURVES_TABLE);
     }
 
     @Override
@@ -69,7 +69,6 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.beginTransaction();
         try {
             ContentValues values = new ContentValues();
-            values.put(KEY_CURVE_ID, curve.curveId);
             values.put(KEY_CURVE_N, curve.curveN);
             values.put(KEY_CURVE_X, curve.curveX);
             values.put(KEY_CURVE_Y, curve.curveY);
@@ -79,13 +78,13 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             db.insertOrThrow(TABLE_CURVES, null, values);
             db.setTransactionSuccessful();
         } catch (Exception e) {
-            Log.d(TAG, "Error while trying to add post to database");
+            Log.d(TAG, "Error while trying to add curve to database");
         } finally {
             db.endTransaction();
         }
     }
 
-    public ArrayList<Curve> getAllPosts() {
+    public ArrayList<Curve> getAllCuves() {
         ArrayList<Curve> curves = new ArrayList<>();
         String TAG = "GET";
 
@@ -117,5 +116,52 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             }
         }
         return curves;
+    }
+
+    public Curve getCurveById(int id) {
+        ArrayList<Curve> curves = new ArrayList<>();
+        String TAG = "GET";
+        Curve curve = new Curve();
+
+        String CURVE_SELECT_QUERY =
+                String.format("SELECT * FROM %s WHERE %s=%s",
+                        TABLE_CURVES, KEY_CURVE_ID, id);
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(CURVE_SELECT_QUERY, null);
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    curve.curveId = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_ID));
+                    curve.curveN = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_N));
+                    curve.curveX = cursor.getDouble(cursor.getColumnIndex(KEY_CURVE_X));
+                    curve.curveY = cursor.getDouble(cursor.getColumnIndex(KEY_CURVE_Y));
+                    curve.curveRotation = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_ROTATION));
+                    curve.curveColor = cursor.getString(cursor.getColumnIndex(KEY_CURVE_COLOR));
+                } while(cursor.moveToNext());
+            }
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to get curves from database");
+        } finally {
+            if (cursor != null && !cursor.isClosed()) {
+                cursor.close();
+            }
+        }
+        return curve;
+    }
+
+    public void clearCurves() {
+        SQLiteDatabase db = getReadableDatabase();
+        String TAG = "CLEAR";
+//        String CLEAR_CURVES_TABLE_QUERRY = "DELETE FROM "+ TABLE_CURVES;
+
+        db.beginTransaction();
+        try {
+            db.delete(TABLE_CURVES,null,null);
+        } catch (Exception e) {
+            Log.d(TAG, "Error clearing curves");
+        } finally {
+            db.endTransaction();
+        }
     }
 }

@@ -30,4 +30,8 @@ public class Curve {
     public String toString(){
         return "Id:"+curveId+", N:"+curveN+", Rotation:"+curveRotation+", X:"+curveX+", Y:"+curveY+", Color:"+curveColor;
     }
+
+    public int getId() {
+        return curveId;
+    }
 }

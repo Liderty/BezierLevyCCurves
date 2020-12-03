@@ -1,17 +1,20 @@
 package com.liber.levyccurves;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddCurveActivity extends AppCompatActivity implements View.OnClickListener {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class EditCurveActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
     DataBaseHandler database_handler;
+    Curve editedCurve;
+
     EditText fieldN;
     EditText fieldRotation;
     EditText fieldX;
@@ -21,9 +24,9 @@ public class AddCurveActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_curve);
+        setContentView(R.layout.activity_edit_curve);
 
-        Button addButton = findViewById(R.id.btnAdd);
+        Button saveButton = findViewById(R.id.btnSave);
         Button cancelButton = findViewById(R.id.btnCancel);
 
         fieldN = findViewById(R.id.etvN);
@@ -34,24 +37,29 @@ public class AddCurveActivity extends AppCompatActivity implements View.OnClickL
 
         database_handler = new DataBaseHandler(context);
 
-        addButton.setOnClickListener(this);
+        Intent mIntent = getIntent();
+        int curveId = mIntent.getIntExtra("curveId", 0);
+
+        editedCurve = database_handler.getCurveById(curveId);
+
+        fieldN.setText(Integer.toString(editedCurve.curveN));
+        fieldRotation.setText(Double.toString(editedCurve.curveRotation));
+        fieldX.setText(Double.toString(editedCurve.curveX));
+        fieldY.setText(Double.toString(editedCurve.curveY));
+        fieldColor.setText(editedCurve.curveColor);
+
+        saveButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnAdd:
-                Toast.makeText(this, "Add", Toast.LENGTH_SHORT).show();
+            case R.id.btnSave:
+                Toast.makeText(this, "Edited", Toast.LENGTH_SHORT).show();
 
-                int newN = Integer.parseInt(String.valueOf(fieldN.getText()));
-                int newRotation = Integer.parseInt(String.valueOf(fieldRotation.getText()));
-                double newX = Double.parseDouble(String.valueOf(fieldX.getText()));
-                double newY = Double.parseDouble(String.valueOf(fieldY.getText()));
-                String newColor = (String.valueOf(fieldColor.getText()));
-
-                Curve newCurve = new Curve(newN, newRotation, newX, newY, newColor);
-                database_handler.addCurve(newCurve);
+                //Curve newCurve = new Curve(0, 90, 1.0, 1.0, "alpha");
+                //database_handler.addCurve(newCurve);
                 finish();
                 break;
             case R.id.btnCancel:
