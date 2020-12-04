@@ -2,6 +2,8 @@ package com.liber.levyccurves;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -36,11 +38,19 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         graphicArea = findViewById(R.id.drowableArea);
         addCurve = findViewById(R.id.btnAdd);
-        drawButton = findViewById(R.id.btnDraw);
-        clearButton = findViewById(R.id.btnClear);
+        drawButton = (Button) findViewById(R.id.btnDraw);
+        clearButton = (Button) findViewById(R.id.btnClear);
         curvesListView = findViewById(R.id.curvesListView);
 
         curvesList = database_handler.getAllCuves();
+        if(curvesList.isEmpty()) {
+            clearButton.setEnabled(false);
+            drawButton.setEnabled(false);
+        } else {
+            clearButton.setEnabled(true);
+            drawButton.setEnabled(true);
+        }
+
         CurvesListViewAdapter adapter = new CurvesListViewAdapter(this, R.layout.listview_curve_row, curvesList);
 
         curvesListView.setAdapter(adapter);
@@ -67,9 +77,7 @@ public class MainActivity extends AppCompatActivity {
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                database_handler.clearCurves();
-                ToastMessage("All Cleared");
-                onResume();
+                showClearAlert();
             }
         });
     }
@@ -79,13 +87,34 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void OpenEditActivity(int curveId) {
-        Intent intent = new Intent(this, EditCurveActivity.class);
-        intent.putExtra("curveId", curveId);
-        startActivity(intent);
-    }
-
     private void ToastMessage(String toastText) {
         Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show();
+    }
+
+    private void showClearAlert() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm clearing");
+        builder.setMessage("Are you sure to delete all curves?");
+        builder.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                database_handler.clearCurves();
+                ToastMessage("All Cleared");
+                dialog.dismiss();
+                onResume();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ToastMessage("Canceled");
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

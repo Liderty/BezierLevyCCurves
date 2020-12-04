@@ -1,7 +1,9 @@
 package com.liber.levyccurves;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +60,36 @@ public class CurvesListViewAdapter extends ArrayAdapter<Curve> {
                 Intent intent  = new Intent(context, EditCurveActivity.class);
                 intent.putExtra("curveId", data.get(position).getId());
                 context.startActivity(intent);
+            }
+        });
+
+        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure to delete this curve?");
+                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        DataBaseHandler database_handler = new DataBaseHandler(context);
+                        database_handler.deleteCurve(data.get(position).getId());
+                        Toast.makeText(context, "Successfuly Deleted"+String.valueOf(data.get(position).getId()), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(context, "Canceled"+String.valueOf(position), Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
             }
         });
 

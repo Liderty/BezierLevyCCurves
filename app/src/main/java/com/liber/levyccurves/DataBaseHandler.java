@@ -118,14 +118,14 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         return curves;
     }
 
-    public Curve getCurveById(int id) {
+    public Curve getCurveById(int curve_id) {
         ArrayList<Curve> curves = new ArrayList<>();
         String TAG = "GET";
         Curve curve = new Curve();
 
         String CURVE_SELECT_QUERY =
                 String.format("SELECT * FROM %s WHERE %s=%s",
-                        TABLE_CURVES, KEY_CURVE_ID, id);
+                        TABLE_CURVES, KEY_CURVE_ID, curve_id);
 
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(CURVE_SELECT_QUERY, null);
@@ -151,17 +151,17 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     }
 
     public void clearCurves() {
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         String TAG = "CLEAR";
-//        String CLEAR_CURVES_TABLE_QUERRY = "DELETE FROM "+ TABLE_CURVES;
 
-        db.beginTransaction();
-        try {
-            db.delete(TABLE_CURVES,null,null);
-        } catch (Exception e) {
-            Log.d(TAG, "Error clearing curves");
-        } finally {
-            db.endTransaction();
-        }
+        db.delete(TABLE_CURVES,null,null);
+        db.close();
+    }
+
+    public void deleteCurve(int curve_id) {
+        SQLiteDatabase db = getWritableDatabase();
+        String TAG = "DELETE";
+        db.delete(TABLE_CURVES, KEY_CURVE_ID + " = ?", new String[] {(Integer.toString(curve_id))});
+        db.close();
     }
 }
