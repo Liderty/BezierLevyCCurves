@@ -16,11 +16,15 @@
     <string name="get_y">Curve Y start position</string>
     <string name="get_n">Number of iterations (N)</string>
     <string name="get_rotation">Rotation</string>
+    <string name="get_line_length">Line length</string>
+    <string name="get_width">Width</string>
 
     <string name="hint_get_color">Pick color for a curve</string>
-    <string name="hint_get_x">Pick starting x position</string>
-    <string name="hint_get_y">Pick starting y position</string>
-    <string name="hint_get_n">Pick a number of curve iterations</string>
-    <string name="hint_get_rotation">Pick rotation of the curve</string>
+    <string name="hint_get_x">Set starting x position</string>
+    <string name="hint_get_y">Set starting y position</string>
+    <string name="hint_get_n">Set a number of curve iterations</string>
+    <string name="hint_get_rotation">Set rotation of the curve</string>
+    <string name="hint_line_length">Set elementary line length</string>
+    <string name="hint_width">Set line width</string>
     <string name="none">None</string>
 </resources>

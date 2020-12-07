@@ -20,6 +20,8 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
     EditText fieldX;
     EditText fieldY;
     EditText fieldColor;
+    EditText fieldLineLength;
+    EditText fieldWidth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         fieldRotation = findViewById(R.id.etvRotation);
         fieldX = findViewById(R.id.etvX);
         fieldY = findViewById(R.id.etvY);
+        fieldLineLength = findViewById(R.id.etvLineLength);
+        fieldWidth = findViewById(R.id.etvWidth);
         fieldColor = findViewById(R.id.etvColor);
 
         database_handler = new DataBaseHandler(context);
@@ -46,6 +50,8 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         fieldRotation.setText(Double.toString(editedCurve.curveRotation));
         fieldX.setText(Double.toString(editedCurve.curveX));
         fieldY.setText(Double.toString(editedCurve.curveY));
+        fieldLineLength.setText(Integer.toString(editedCurve.curveLineLength));
+        fieldWidth.setText(Integer.toString(editedCurve.curveWidth));
         fieldColor.setText(editedCurve.curveColor);
 
         saveButton.setOnClickListener(this);

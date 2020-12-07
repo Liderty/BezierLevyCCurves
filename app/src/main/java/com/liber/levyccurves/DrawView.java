@@ -34,7 +34,7 @@ public class DrawView extends View {
         lines = new ArrayList<Line>();
 
         paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(3);
+        paint.setStrokeWidth(5);
     }
 
     public DrawView(Context context) {

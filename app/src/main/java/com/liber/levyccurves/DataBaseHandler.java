@@ -8,14 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import static java.lang.Integer.parseInt;
 
 public class DataBaseHandler extends SQLiteOpenHelper {
     // Database Info
     private static final String DATABASE_NAME = "curvesDatabase";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // Table Names
     private static final String TABLE_CURVES = "curves";
@@ -27,6 +24,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final String KEY_CURVE_Y = "curveY";
     private static final String KEY_CURVE_ROTATION = "curveRotation";
     private static final String KEY_CURVE_COLOR = "curveColor";
+    private static final String KEY_CURVE_LINE_LENGTH = "curveLineLength";
+    private static final String KEY_CURVE_WIDTH = "curveWidth";
 
     public DataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,6 +46,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 KEY_CURVE_X + " REAL" + "," +
                 KEY_CURVE_Y + " REAL" + "," +
                 KEY_CURVE_ROTATION + " INTEGER" + "," +
+                KEY_CURVE_LINE_LENGTH + " INTEGER" + "," +
+                KEY_CURVE_WIDTH + " INTEGER" + "," +
                 KEY_CURVE_COLOR + " VARCHAR(10)" +
                 ")";
 
@@ -73,6 +74,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
             values.put(KEY_CURVE_X, curve.curveX);
             values.put(KEY_CURVE_Y, curve.curveY);
             values.put(KEY_CURVE_ROTATION, curve.curveRotation);
+            values.put(KEY_CURVE_LINE_LENGTH, curve.curveLineLength);
+            values.put(KEY_CURVE_WIDTH, curve.curveWidth);
             values.put(KEY_CURVE_COLOR, curve.curveColor);
 
             db.insertOrThrow(TABLE_CURVES, null, values);
@@ -103,6 +106,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                     newCurve.curveX = cursor.getDouble(cursor.getColumnIndex(KEY_CURVE_X));
                     newCurve.curveY = cursor.getDouble(cursor.getColumnIndex(KEY_CURVE_Y));
                     newCurve.curveRotation = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_ROTATION));
+                    newCurve.curveLineLength = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_LINE_LENGTH));
+                    newCurve.curveWidth = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_WIDTH));
                     newCurve.curveColor = cursor.getString(cursor.getColumnIndex(KEY_CURVE_COLOR));
 
                     curves.add(newCurve);
@@ -137,6 +142,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                     curve.curveX = cursor.getDouble(cursor.getColumnIndex(KEY_CURVE_X));
                     curve.curveY = cursor.getDouble(cursor.getColumnIndex(KEY_CURVE_Y));
                     curve.curveRotation = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_ROTATION));
+                    curve.curveLineLength = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_LINE_LENGTH));
+                    curve.curveWidth = cursor.getInt(cursor.getColumnIndex(KEY_CURVE_WIDTH));
                     curve.curveColor = cursor.getString(cursor.getColumnIndex(KEY_CURVE_COLOR));
                 } while(cursor.moveToNext());
             }

@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     DataBaseHandler database_handler;
@@ -54,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         CurvesListViewAdapter adapter = new CurvesListViewAdapter(this, R.layout.listview_curve_row, curvesList);
+        adapter.notifyDataSetChanged();
         curvesListView.setAdapter(adapter);
+
 
         addCurve.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 for (int iter = 0; iter < curvesList.size(); iter++) {
-                    recursiveCCurve(curvesList.get(iter).curveN, 150, curvesList.get(iter).curveRotation, curvesList.get(iter).curveX, curvesList.get(iter).curveY);
+                    Curve currentCurve = curvesList.get(iter);
+                    recursiveCCurve(currentCurve.curveN, currentCurve.curveLineLength, currentCurve.curveRotation, currentCurve.curveX, currentCurve.curveY);
                 }
             }
         });
@@ -138,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void drawLine(int start_x, int start_y, int end_x, int end_y) {
+        graphicArea.clear();
         graphicArea.drawLine(start_x, start_y, end_x, end_y);
     }
 }

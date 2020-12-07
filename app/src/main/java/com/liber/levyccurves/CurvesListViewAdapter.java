@@ -90,6 +90,7 @@ public class CurvesListViewAdapter extends ArrayAdapter<Curve> {
 
                 AlertDialog alert = builder.create();
                 alert.show();
+                notifyDataSetChanged();
             }
         });
 

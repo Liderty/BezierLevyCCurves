@@ -119,6 +119,52 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/get_line_length"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_creation"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etvLineLength"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_line_length"
+                    android:textColorHint="@color/colorHintText"
+                    android:inputType="number" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/get_width"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_creation"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etvWidth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_width"
+                    android:textColorHint="@color/colorHintText"
+                    android:inputType="number" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/get_color"
                 android:textColor="@color/colorDarkText"
                 android:textSize="@dimen/text_size_creation"/>

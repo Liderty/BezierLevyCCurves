@@ -16,6 +16,8 @@ public class AddCurveActivity extends AppCompatActivity implements View.OnClickL
     EditText fieldRotation;
     EditText fieldX;
     EditText fieldY;
+    EditText fieldLineLength;
+    EditText fieldWidth;
     EditText fieldColor;
 
     @Override
@@ -30,6 +32,8 @@ public class AddCurveActivity extends AppCompatActivity implements View.OnClickL
         fieldRotation = findViewById(R.id.etvRotation);
         fieldX = findViewById(R.id.etvX);
         fieldY = findViewById(R.id.etvY);
+        fieldLineLength = findViewById(R.id.etvLineLength);
+        fieldWidth = findViewById(R.id.etvWidth);
         fieldColor = findViewById(R.id.etvColor);
 
         database_handler = new DataBaseHandler(context);
@@ -48,9 +52,11 @@ public class AddCurveActivity extends AppCompatActivity implements View.OnClickL
                 int newRotation = Integer.parseInt(String.valueOf(fieldRotation.getText()));
                 double newX = Double.parseDouble(String.valueOf(fieldX.getText()));
                 double newY = Double.parseDouble(String.valueOf(fieldY.getText()));
+                int newLineLength = Integer.parseInt(String.valueOf(fieldLineLength.getText()));
+                int newWidth = Integer.parseInt(String.valueOf(fieldWidth.getText()));
                 String newColor = (String.valueOf(fieldColor.getText()));
 
-                Curve newCurve = new Curve(newN, newRotation, newX, newY, newColor);
+                Curve newCurve = new Curve(newN, newRotation, newX, newY, newLineLength, newWidth, newColor);
                 database_handler.addCurve(newCurve);
                 finish();
                 break;
