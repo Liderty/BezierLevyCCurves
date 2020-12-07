@@ -41,7 +41,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_get_n"
-                    android:textColorHint="@color/colorHintText" />
+                    android:textColorHint="@color/colorHintText"
+                    android:inputType="number
+" />
 
             </LinearLayout>
 
@@ -63,7 +65,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_get_rotation"
-                    android:textColorHint="@color/colorHintText" />
+                    android:textColorHint="@color/colorHintText"
+                    android:inputType="number" />
 
             </LinearLayout>
 
@@ -85,7 +88,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_get_x"
-                    android:textColorHint="@color/colorHintText" />
+                    android:textColorHint="@color/colorHintText"
+                    android:inputType="numberDecimal" />
 
             </LinearLayout>
 
@@ -107,7 +111,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_get_y"
-                    android:textColorHint="@color/colorHintText" />
+                    android:textColorHint="@color/colorHintText"
+                    android:inputType="numberDecimal" />
 
             </LinearLayout>
 

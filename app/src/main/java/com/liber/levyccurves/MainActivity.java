@@ -5,25 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
     DataBaseHandler database_handler;
 
-    private TextView graphicArea;
+    private DrawView graphicArea;
     private Button addCurve;
     private Button drawButton;
     private Button clearButton;
     private ListView curvesListView;
-    ArrayList curvesList;
+    ArrayList<Curve> curvesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,14 +36,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        graphicArea = findViewById(R.id.drowableArea);
         addCurve = findViewById(R.id.btnAdd);
         drawButton = (Button) findViewById(R.id.btnDraw);
         clearButton = (Button) findViewById(R.id.btnClear);
         curvesListView = findViewById(R.id.curvesListView);
 
+        graphicArea = findViewById(R.id.drowableArea);
+        graphicArea.setBackgroundColor(Color.WHITE);
+
         curvesList = database_handler.getAllCuves();
-        if(curvesList.isEmpty()) {
+        if (curvesList.isEmpty()) {
             clearButton.setEnabled(false);
             drawButton.setEnabled(false);
         } else {
@@ -52,13 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         CurvesListViewAdapter adapter = new CurvesListViewAdapter(this, R.layout.listview_curve_row, curvesList);
-
         curvesListView.setAdapter(adapter);
-
-        graphicArea.setText("");
-        for(int i=0; i<curvesList.size(); i++) {
-            graphicArea.append(curvesList.get(i).toString() + "\n");
-        }
 
         addCurve.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
         drawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastMessage(curvesList.get(0).toString());
+                for (int iter = 0; iter < curvesList.size(); iter++) {
+                    recursiveCCurve(curvesList.get(iter).curveN, 150, curvesList.get(iter).curveRotation, curvesList.get(iter).curveX, curvesList.get(iter).curveY);
+                }
             }
         });
 
@@ -116,5 +114,30 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void recursiveCCurve(int curveN, double curveLength, int curveRotation, double curveX, double curveY) {
+        double x = curveX;
+        double y = curveY;
+        double length = curveLength;
+
+        int iteration = curveN;
+
+        if (iteration > 0) {
+            length = length / Math.sqrt(2);
+
+            recursiveCCurve(iteration - 1, length, curveRotation + 45, x, y);
+
+            x = x + (length * Math.cos(Math.toRadians(curveRotation + 45)));
+            y = y + (length * Math.sin(Math.toRadians(curveRotation + 45)));
+
+            recursiveCCurve(iteration - 1, length, curveRotation - 45, x, y);
+        } else {
+            drawLine((int) x, (int) y, (int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))));
+        }
+    }
+
+    private void drawLine(int start_x, int start_y, int end_x, int end_y) {
+        graphicArea.drawLine(start_x, start_y, end_x, end_y);
     }
 }
