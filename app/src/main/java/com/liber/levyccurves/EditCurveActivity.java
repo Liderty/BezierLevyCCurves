@@ -2,13 +2,18 @@ package com.liber.levyccurves;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class EditCurveActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
@@ -22,6 +27,9 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
     EditText fieldColor;
     EditText fieldLineLength;
     EditText fieldWidth;
+
+    ImageView colorBox;
+    int currentColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +46,7 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         fieldLineLength = findViewById(R.id.etvLineLength);
         fieldWidth = findViewById(R.id.etvWidth);
         fieldColor = findViewById(R.id.etvColor);
+        colorBox = findViewById(R.id.colorBox);
 
         database_handler = new DataBaseHandler(context);
 
@@ -54,6 +63,11 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         fieldWidth.setText(Integer.toString(editedCurve.curveWidth));
         fieldColor.setText(editedCurve.curveColor);
 
+        currentColor = editedCurve.getColor();
+        colorBox.setBackground(new ColorDrawable(currentColor));
+        String strColor = String.format("#%06X", 0xFFFFFF & currentColor);
+        fieldColor.setText(strColor);
+
         saveButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
     }
@@ -63,15 +77,32 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.btnSave:
                 Toast.makeText(this, "Edited", Toast.LENGTH_SHORT).show();
-
-                //Curve newCurve = new Curve(0, 90, 1.0, 1.0, "alpha");
-                //database_handler.addCurve(newCurve);
                 finish();
                 break;
             case R.id.btnCancel:
                 Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
+            case R.id.colorBox:
+                openColorPicker();
+                break;
         }
+    }
+
+    public void openColorPicker() {
+        AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, currentColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+            }
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                currentColor = color;
+                colorBox.setBackgroundColor(currentColor);
+                String strColor = String.format("#%06X", 0xFFFFFF & currentColor);
+
+                fieldColor.setText(strColor);
+            }
+        });
+        colorPicker.show();
     }
 }

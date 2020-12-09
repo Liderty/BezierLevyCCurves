@@ -1,5 +1,7 @@
 package com.liber.levyccurves;
 
+import android.graphics.Color;
+
 class Curve {
     public int curveId;
     public int curveN;
@@ -29,4 +31,6 @@ class Curve {
     public int getId() {
         return curveId;
     }
+
+    public int getColor() {return Color.parseColor(curveColor);}
 }

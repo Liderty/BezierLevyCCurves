@@ -15,26 +15,30 @@ class Line {
     int startY;
     int endX;
     int endY;
+    int lineWidth;
+    int lineColor;
 
-    public Line(int start_x, int start_y, int end_x, int end_y) {
+    public Line(int start_x, int start_y, int end_x, int end_y, int width, int color) {
         startX = start_x;
         startY = start_y;
         endX = end_x;
         endY = end_y;
+        lineWidth = width;
+        lineColor = color;
     }
 }
 
 public class DrawView extends View {
     private Paint paint;
     private List<Line> lines;
+    private int DEFAULT_LINE_WIDTH = 5;
 
     private void init() {
         paint = new Paint();
 
         lines = new ArrayList<Line>();
 
-        paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(5);
+        paint.setStrokeWidth(DEFAULT_LINE_WIDTH);
     }
 
     public DrawView(Context context) {
@@ -55,12 +59,14 @@ public class DrawView extends View {
     @Override
     public void onDraw(Canvas canvas) {
         for(Line l : lines) {
+            paint.setStrokeWidth(l.lineWidth);
+            paint.setColor(l.lineColor);
             canvas.drawLine(l.startX, l.startY, l.endX, l.endY, paint);
         }
     }
 
-    public void drawLine(int start_x, int start_y, int end_x, int end_y) {
-        lines.add(new Line(start_x, start_y, end_x, end_y));
+    public void drawLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
+        lines.add(new Line(start_x, start_y, end_x, end_y, width, color));
         postInvalidate();
     }
 

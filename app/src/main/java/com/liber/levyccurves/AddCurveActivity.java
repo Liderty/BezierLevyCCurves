@@ -1,13 +1,18 @@
 package com.liber.levyccurves;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class AddCurveActivity extends AppCompatActivity implements View.OnClickListener {
     Context context = this;
@@ -19,6 +24,8 @@ public class AddCurveActivity extends AppCompatActivity implements View.OnClickL
     EditText fieldLineLength;
     EditText fieldWidth;
     EditText fieldColor;
+    ImageView colorBox;
+    int currentColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +42,17 @@ public class AddCurveActivity extends AppCompatActivity implements View.OnClickL
         fieldLineLength = findViewById(R.id.etvLineLength);
         fieldWidth = findViewById(R.id.etvWidth);
         fieldColor = findViewById(R.id.etvColor);
+        colorBox = findViewById(R.id.colorBox);
+
+        currentColor = colorBox.getSolidColor();
+        String strColor = String.format("#%06X", 0xFFFFFF & currentColor);
+        fieldColor.setText(strColor);
 
         database_handler = new DataBaseHandler(context);
 
         addButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
+        colorBox.setOnClickListener(this);
     }
 
     @Override
@@ -64,6 +77,26 @@ public class AddCurveActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
+            case R.id.colorBox:
+                openColorPicker();
+                break;
         }
+    }
+
+    public void openColorPicker() {
+        AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, currentColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+            }
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                currentColor = color;
+                colorBox.setBackgroundColor(currentColor);
+                String strColor = String.format("#%06X", 0xFFFFFF & currentColor);
+
+                fieldColor.setText(strColor);
+            }
+        });
+        colorPicker.show();
     }
 }

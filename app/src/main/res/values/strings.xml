@@ -19,7 +19,7 @@
     <string name="get_line_length">Line length</string>
     <string name="get_width">Width</string>
 
-    <string name="hint_get_color">Pick color for a curve</string>
+    <string name="hint_get_color">Color RGB</string>
     <string name="hint_get_x">Set starting x position</string>
     <string name="hint_get_y">Set starting y position</string>
     <string name="hint_get_n">Set a number of curve iterations</string>

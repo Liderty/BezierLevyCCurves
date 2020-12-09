@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 for (int iter = 0; iter < curvesList.size(); iter++) {
                     Curve currentCurve = curvesList.get(iter);
-                    recursiveCCurve(currentCurve.curveN, currentCurve.curveLineLength, currentCurve.curveRotation, currentCurve.curveX, currentCurve.curveY);
+                    recursiveCCurve(currentCurve.curveN, currentCurve.curveLineLength, currentCurve.curveRotation, currentCurve.curveX, currentCurve.curveY, currentCurve.curveWidth, currentCurve.getColor());
                 }
             }
         });
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
-    private void recursiveCCurve(int curveN, double curveLength, int curveRotation, double curveX, double curveY) {
+    private void recursiveCCurve(int curveN, double curveLength, int curveRotation, double curveX, double curveY, int curveWidth, int curveColor) {
         double x = curveX;
         double y = curveY;
         double length = curveLength;
@@ -128,19 +128,19 @@ public class MainActivity extends AppCompatActivity {
         if (iteration > 0) {
             length = length / Math.sqrt(2);
 
-            recursiveCCurve(iteration - 1, length, curveRotation + 45, x, y);
+            recursiveCCurve(iteration - 1, length, curveRotation + 45, x, y, curveWidth, curveColor);
 
             x = x + (length * Math.cos(Math.toRadians(curveRotation + 45)));
             y = y + (length * Math.sin(Math.toRadians(curveRotation + 45)));
 
-            recursiveCCurve(iteration - 1, length, curveRotation - 45, x, y);
+            recursiveCCurve(iteration - 1, length, curveRotation - 45, x, y, curveWidth, curveColor);
         } else {
-            drawLine((int) x, (int) y, (int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))));
+            drawLine((int) x, (int) y, (int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))), curveWidth, curveColor);
         }
     }
 
-    private void drawLine(int start_x, int start_y, int end_x, int end_y) {
+    private void drawLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
         graphicArea.clear();
-        graphicArea.drawLine(start_x, start_y, end_x, end_y);
+        graphicArea.drawLine(start_x, start_y, end_x, end_y, width, color);
     }
 }
