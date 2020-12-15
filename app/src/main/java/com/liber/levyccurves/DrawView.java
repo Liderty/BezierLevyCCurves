@@ -2,7 +2,6 @@ package com.liber.levyccurves;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -32,11 +31,13 @@ public class DrawView extends View {
     private Paint paint;
     private List<Line> lines;
     private int DEFAULT_LINE_WIDTH = 5;
+    private boolean isStateChanged = false;
 
     private void init() {
         paint = new Paint();
         lines = new ArrayList<Line>();
         paint.setStrokeWidth(DEFAULT_LINE_WIDTH);
+        this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     public DrawView(Context context) {
@@ -56,15 +57,19 @@ public class DrawView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        for(Line l : lines) {
-            paint.setStrokeWidth(l.lineWidth);
-            paint.setColor(l.lineColor);
-            canvas.drawLine(l.startX, l.startY, l.endX, l.endY, paint);
+        if(isStateChanged) {
+            for (Line l : lines) {
+                paint.setStrokeWidth(l.lineWidth);
+                paint.setColor(l.lineColor);
+                canvas.drawLine(l.startX, l.startY, l.endX, l.endY, paint);
+            }
+            isStateChanged = false;
         }
     }
 
     public void drawLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
         lines.add(new Line(start_x, start_y, end_x, end_y, width, color));
+        isStateChanged = true;
         postInvalidate();
     }
 
