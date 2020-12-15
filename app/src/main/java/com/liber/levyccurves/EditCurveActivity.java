@@ -1,8 +1,9 @@
 package com.liber.levyccurves;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,7 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
 
         Button saveButton = findViewById(R.id.btnSave);
         Button cancelButton = findViewById(R.id.btnCancel);
+        Button removeButton = findViewById(R.id.btnRemove);
 
         fieldN = findViewById(R.id.etvN);
         fieldRotation = findViewById(R.id.etvRotation);
@@ -70,6 +72,8 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
 
         saveButton.setOnClickListener(this);
         cancelButton.setOnClickListener(this);
+        colorBox.setOnClickListener(this);
+        removeButton.setOnClickListener(this);
     }
 
     @Override
@@ -85,6 +89,9 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.colorBox:
                 openColorPicker();
+                break;
+            case R.id.btnRemove:
+                openRemoveDialog();
                 break;
         }
     }
@@ -104,5 +111,32 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
             }
         });
         colorPicker.show();
+    }
+
+    public void openRemoveDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Confirm");
+        builder.setMessage("Are you sure to delete this curve?");
+        builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                DataBaseHandler database_handler = new DataBaseHandler(context);
+                database_handler.deleteCurve(editedCurve.getId());
+                Toast.makeText(context, "Successfuly Deleted"+String.valueOf(editedCurve.getId()), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                finish();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

@@ -15,12 +15,25 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    static final int DEFAULT_LINE_MIN_ITERATIONS = 1;
+    static final int DEFAULT_LINE_MAX_ITERATIONS = 14;
+    static final int DEFAULT_LINE_MIN_WIDTH = 1;
+    static final int DEFAULT_LINE_MAX_WIDTH = 25;
+    static final int DEFAULT_LINE_MIN_LENGTH = 50;
+    static final int DEFAULT_LINE_MAX_LENGTH = 500;
+    static final int DEFAULT_LINE_MIN_XY_COORDINATE = 1;
+    static final int DEFAULT_LINE_MAX_XY_COORDINATE = 1000;
+    static final int DEFAULT_LINE_MIN_ROTATION = 1;
+    static final int DEFAULT_LINE_MAX_ROTATION = 360;
+
     DataBaseHandler database_handler;
 
     private DrawView graphicArea;
-    private Button addCurve;
+    private Button addButton;
     private Button drawButton;
     private Button clearButton;
+    private Button rndButton;
     private ListView curvesListView;
     ArrayList<Curve> curvesList;
 
@@ -35,13 +48,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        addCurve = findViewById(R.id.btnAdd);
+        addButton = findViewById(R.id.btnAdd);
         drawButton = (Button) findViewById(R.id.btnDraw);
         clearButton = (Button) findViewById(R.id.btnClear);
+        rndButton = (Button) findViewById(R.id.btnRnd);
         curvesListView = findViewById(R.id.curvesListView);
 
         graphicArea = findViewById(R.id.drowableArea);
-        graphicArea.setBackgroundColor(Color.WHITE);
+        graphicArea.setBackgroundColor(Color.BLACK);
+
+        String test = "height: "+graphicArea.getHeight()+" width:"+graphicArea.getWidth();
+        Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
 
         curvesList = database_handler.getAllCuves();
         if (curvesList.isEmpty()) {
@@ -57,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         curvesListView.setAdapter(adapter);
 
 
-        addCurve.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 OpenAddActivity();
@@ -67,10 +84,12 @@ public class MainActivity extends AppCompatActivity {
         drawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                disableUi(false);
                 for (int iter = 0; iter < curvesList.size(); iter++) {
                     Curve currentCurve = curvesList.get(iter);
                     recursiveCCurve(currentCurve.curveN, currentCurve.curveLineLength, currentCurve.curveRotation, currentCurve.curveX, currentCurve.curveY, currentCurve.curveWidth, currentCurve.getColor());
                 }
+                disableUi(true);
             }
         });
 
@@ -80,6 +99,21 @@ public class MainActivity extends AppCompatActivity {
                 showClearAlert();
             }
         });
+
+        rndButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generateRandoms(10);
+            }
+        });
+    }
+
+    private void disableUi (boolean enabled) {
+        curvesListView.setEnabled(enabled);
+        clearButton.setEnabled(enabled);
+        rndButton.setEnabled(enabled);
+        drawButton.setEnabled(enabled);
+        addButton.setEnabled(enabled);
     }
 
     private void OpenAddActivity() {
@@ -140,7 +174,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void drawLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
-        graphicArea.clear();
         graphicArea.drawLine(start_x, start_y, end_x, end_y, width, color);
+    }
+
+    private void generateRandoms(int number_of_curves) {
+        database_handler = new DataBaseHandler(this);
+
+        for(int i=0; i<number_of_curves; i++) {
+            Curve randomizedCurve = getRandomCurve();
+            database_handler.addCurve(randomizedCurve);
+        }
+        onResume();
+    }
+
+    private Curve getRandomCurve() {
+        int randomN = Randomizer.generate(DEFAULT_LINE_MIN_ITERATIONS, DEFAULT_LINE_MAX_ITERATIONS);
+        int randomX = Randomizer.generate(DEFAULT_LINE_MIN_XY_COORDINATE, DEFAULT_LINE_MAX_XY_COORDINATE);
+        int randomY = Randomizer.generate(DEFAULT_LINE_MIN_XY_COORDINATE, DEFAULT_LINE_MAX_XY_COORDINATE);
+        int randomRotation = Randomizer.generate(DEFAULT_LINE_MIN_ROTATION, DEFAULT_LINE_MAX_ROTATION);
+        int randomLineLength = Randomizer.generate(DEFAULT_LINE_MIN_LENGTH, DEFAULT_LINE_MAX_LENGTH);
+        int randomWidth = Randomizer.generate(DEFAULT_LINE_MIN_WIDTH, DEFAULT_LINE_MAX_WIDTH);
+        String randomColor = Randomizer.getRandomColor();
+
+        Curve randromCurve = new Curve(randomN, randomRotation, randomX, randomY, randomLineLength, randomWidth, randomColor);
+        return randromCurve;
     }
 }

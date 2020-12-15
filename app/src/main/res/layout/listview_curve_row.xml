@@ -24,7 +24,7 @@
         <CheckBox
             android:id="@+id/chbDraw"
             android:layout_width="wrap_content"
-            android:layout_weight="0.6"
+            android:layout_weight="0.9"
             android:layout_height="wrap_content"/>
 
         <Button
@@ -33,20 +33,10 @@
             android:layout_height="wrap_content"
             android:text="@string/edit"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_weight="0.2"
-            android:layout_margin="5dp"
+            android:textSize="13sp"
+            android:layout_weight="0.1"
             android:focusable="false"/>
 
-        <Button
-            android:id="@+id/btnRemove"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/remove"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_weight="0.2"
-            android:layout_margin="5dp"/>
     </LinearLayout>
 
     <LinearLayout

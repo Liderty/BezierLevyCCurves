@@ -43,7 +43,6 @@ public class CurvesListViewAdapter extends ArrayAdapter<Curve> {
 
             holder.curveInfo = (TextView) convertView.findViewById(R.id.curveInfo);
             holder.btnEdit = (Button) convertView.findViewById(R.id.btnEdit);
-            holder.btnRemove = (Button) convertView.findViewById(R.id.btnRemove);
             holder.chbDraw = (CheckBox) convertView.findViewById(R.id.chbDraw);
 
             convertView.setTag(holder);
@@ -62,43 +61,11 @@ public class CurvesListViewAdapter extends ArrayAdapter<Curve> {
                 context.startActivity(intent);
             }
         });
-
-        holder.btnRemove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Confirm");
-                builder.setMessage("Are you sure to delete this curve?");
-                builder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        DataBaseHandler database_handler = new DataBaseHandler(context);
-                        database_handler.deleteCurve(data.get(position).getId());
-                        Toast.makeText(context, "Successfuly Deleted"+String.valueOf(data.get(position).getId()), Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(context, "Canceled"+String.valueOf(position), Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
-
-                AlertDialog alert = builder.create();
-                alert.show();
-                notifyDataSetChanged();
-            }
-        });
-
         return  convertView;
     }
 
     private class ViewHolder {
-        protected Button btnEdit, btnRemove;
+        protected Button btnEdit;
         private TextView curveInfo;
         private CheckBox chbDraw;
     }

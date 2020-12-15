@@ -35,9 +35,7 @@ public class DrawView extends View {
 
     private void init() {
         paint = new Paint();
-
         lines = new ArrayList<Line>();
-
         paint.setStrokeWidth(DEFAULT_LINE_WIDTH);
     }
 
@@ -70,7 +68,7 @@ public class DrawView extends View {
         postInvalidate();
     }
 
-    public void clear(){
+    public void clear() {
         invalidate();
     }
 }

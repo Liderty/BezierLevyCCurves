@@ -203,15 +203,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btnSave"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:background="@drawable/rounded_button"
-                android:text="@string/save"
-                android:textColor="@color/colorBrightText" />
-
-            <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -220,10 +211,25 @@
                 android:text="@string/cancel"
                 android:textColor="@color/colorBrightText" />
 
+            <Button
+                android:id="@+id/btnRemove"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:background="@drawable/rounded_button"
+                android:text="@string/remove"
+                android:textColor="@color/colorBrightText" />
 
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:background="@drawable/rounded_button"
+                android:text="@string/save"
+                android:textColor="@color/colorBrightText" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 
