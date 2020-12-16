@@ -12,6 +12,7 @@
     <dimen name="text_size_medium_header">25sp</dimen>
     <dimen name="text_size_small_header">20sp</dimen>
     <dimen name="text_size_creation">15sp</dimen>
+    <dimen name="text_size_row">15sp</dimen>
 
     <dimen name="icon_size_medium">48dp</dimen>
     <dimen name="icon_size_small">32dp</dimen>

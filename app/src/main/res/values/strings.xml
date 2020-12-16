@@ -27,4 +27,15 @@
     <string name="hint_line_length">Set elementary line length</string>
     <string name="hint_width">Set line width</string>
     <string name="none">None</string>
+
+    <!-- Curve listview row info -->
+    <string name="curve_id">Id</string>
+    <string name="curve_n">N</string>
+    <string name="curve_rotation">Rot.</string>
+    <string name="curve_x">X</string>
+    <string name="curve_y">Y</string>
+    <string name="curve_color">Color</string>
+    <string name="curve_length">Len.</string>
+    <string name="curve_width">Width</string>
+
 </resources>

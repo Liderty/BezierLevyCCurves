@@ -31,7 +31,9 @@ public class DrawView extends View {
     private Paint paint;
     private List<Line> lines;
     private int DEFAULT_LINE_WIDTH = 5;
+
     private boolean isStateChanged = false;
+    private boolean clearFlag = false;
 
     private void init() {
         paint = new Paint();
@@ -57,7 +59,9 @@ public class DrawView extends View {
 
     @Override
     public void onDraw(Canvas canvas) {
-        if(isStateChanged) {
+        if(clearFlag) {
+            clearFlag = false;
+        } else if(isStateChanged) {
             for (Line l : lines) {
                 paint.setStrokeWidth(l.lineWidth);
                 paint.setColor(l.lineColor);
@@ -74,6 +78,7 @@ public class DrawView extends View {
     }
 
     public void clear() {
+        clearFlag = true;
         invalidate();
     }
 }
