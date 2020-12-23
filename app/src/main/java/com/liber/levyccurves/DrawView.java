@@ -2,6 +2,7 @@ package com.liber.levyccurves;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -30,7 +31,11 @@ class Line {
 public class DrawView extends View {
     private Paint paint;
     private List<Line> lines;
+    private List<Point> controlPoints;
+    private List<Point> bezierPoints;
+
     private int DEFAULT_LINE_WIDTH = 5;
+    final static int DEFAULT_CONTROL_POINT_SIZE = 10;
 
     private boolean isStateChanged = false;
     private boolean clearFlag = false;
@@ -38,8 +43,16 @@ public class DrawView extends View {
     private void init() {
         paint = new Paint();
         lines = new ArrayList<Line>();
+        controlPoints = new ArrayList<Point>();
+        bezierPoints = new ArrayList<Point>();
         paint.setStrokeWidth(DEFAULT_LINE_WIDTH);
+        paint.setStyle(Paint.Style.FILL);
+
         this.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+    }
+
+    public List<Point> getControlPoints() {
+        return controlPoints;
     }
 
     public DrawView(Context context) {
@@ -67,12 +80,37 @@ public class DrawView extends View {
                 paint.setColor(l.lineColor);
                 canvas.drawLine(l.startX, l.startY, l.endX, l.endY, paint);
             }
+
+            for (Point cp : controlPoints) {
+                System.out.println(">>> Control point:"+cp.x+", "+cp.y+"; ");
+                paint.setColor(Color.RED);
+                canvas.drawCircle((float) cp.x, (float) cp.y, DEFAULT_CONTROL_POINT_SIZE, paint);
+            }
+
+            for (Point p : bezierPoints) {
+                System.out.println("Bezier point:"+p.x+", "+p.y+"; ");
+                paint.setColor(Color.GREEN);
+                canvas.drawCircle((float) p.x, (float) p.y, 5, paint);
+            }
+
             isStateChanged = false;
         }
     }
 
+    public void addBezierPoint(Point point) {
+        bezierPoints.add(point);
+        isStateChanged = true;
+        postInvalidate();
+    }
+
     public void drawLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
         lines.add(new Line(start_x, start_y, end_x, end_y, width, color));
+        isStateChanged = true;
+        postInvalidate();
+    }
+
+    public void addControlPoint(Point point) {
+        controlPoints.add(point);
         isStateChanged = true;
         postInvalidate();
     }

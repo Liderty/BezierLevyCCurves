@@ -31,6 +31,7 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
 
     ImageView colorBox;
     int currentColor;
+    int curveId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         database_handler = new DataBaseHandler(context);
 
         Intent mIntent = getIntent();
-        int curveId = mIntent.getIntExtra("curveId", 0);
+        curveId = mIntent.getIntExtra("curveId", 0);
 
         editedCurve = database_handler.getCurveById(curveId);
 
@@ -80,11 +81,12 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSave:
+                saveEdition(curveId);
                 Toast.makeText(this, "Edited", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.btnCancel:
-                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
                 finish();
                 break;
             case R.id.colorBox:
@@ -96,7 +98,7 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void openColorPicker() {
+    private void openColorPicker() {
         AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, currentColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
@@ -113,7 +115,7 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         colorPicker.show();
     }
 
-    public void openRemoveDialog() {
+    private void openRemoveDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Confirm");
         builder.setMessage("Are you sure to delete this curve?");
@@ -138,5 +140,19 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private void saveEdition(int curveId) {
+        int editedN = Integer.parseInt(String.valueOf(fieldN.getText()));
+        int editedRotation = (int) Double.parseDouble(String.valueOf(fieldRotation.getText()));
+        double editedX = Double.parseDouble(String.valueOf(fieldX.getText()));
+        double editedY = Double.parseDouble(String.valueOf(fieldY.getText()));
+        int editedLineLength = Integer.parseInt(String.valueOf(fieldLineLength.getText()));
+        int editedWidth = Integer.parseInt(String.valueOf(fieldWidth.getText()));
+        String editedColor = (String.valueOf(fieldColor.getText()));
+
+        Curve editedCurve = new Curve(editedN, editedRotation, editedX, editedY, editedLineLength, editedWidth, editedColor);
+        System.out.println("CURVE READY");
+        database_handler.updateCurve(curveId, editedCurve);
     }
 }

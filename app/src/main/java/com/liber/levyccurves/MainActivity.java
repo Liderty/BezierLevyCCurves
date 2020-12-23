@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -87,8 +88,16 @@ public class MainActivity extends AppCompatActivity {
                 disableUi(false);
                 for (int iter = 0; iter < curvesList.size(); iter++) {
                     Curve currentCurve = curvesList.get(iter);
+
+                    //Control Point
+                    Point point = new Point((int) currentCurve.curveX, (int) currentCurve.curveY);
+                    drawControlPoint(point);
+
                     recursiveCCurve(currentCurve.curveN, currentCurve.curveLineLength, currentCurve.curveRotation, currentCurve.curveX, currentCurve.curveY, currentCurve.curveWidth, currentCurve.getColor());
+                    bezierPoints();
                 }
+
+
                 disableUi(true);
             }
         });
@@ -169,12 +178,30 @@ public class MainActivity extends AppCompatActivity {
 
             recursiveCCurve(iteration - 1, length, curveRotation - 45, x, y, curveWidth, curveColor);
         } else {
-            drawLine((int) x, (int) y, (int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))), curveWidth, curveColor);
+            //drawLine((int) x, (int) y, (int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))), curveWidth, curveColor);
+            Point point2 = new Point((int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))));
+            drawControlPoint(point2);
         }
     }
 
     private void drawLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
         graphicArea.drawLine(start_x, start_y, end_x, end_y, width, color);
+    }
+
+    private void drawControlPoint(Point point) {
+        graphicArea.addControlPoint(point);
+    }
+
+    private void bezierPoints() {
+        BezierCurve bezierCalc = new BezierCurve();
+        List<Point> controlPoints = graphicArea.getControlPoints();
+
+        for(double step=0.0; step<=1; step+=0.01) {
+            System.out.println(step);
+
+            Point newPoint = bezierCalc.quadraticBezierCurve(controlPoints.get(0), controlPoints.get(2), controlPoints.get(1), step);
+            graphicArea.addBezierPoint(newPoint);
+        }
     }
 
     private void generateRandoms(int number_of_curves) {
