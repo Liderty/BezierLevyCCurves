@@ -38,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
     private ListView curvesListView;
     ArrayList<Curve> curvesList;
 
+    List<Point> currentPoints;
+    private boolean isNextCurve;
+    private int curveNumber;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +62,13 @@ public class MainActivity extends AppCompatActivity {
         graphicArea = findViewById(R.id.drowableArea);
         graphicArea.setBackgroundColor(Color.BLACK);
 
-        String test = "height: "+graphicArea.getHeight()+" width:"+graphicArea.getWidth();
-        Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
+        // TODO: Add auto graphical area size limit
+//        String test = "height: "+graphicArea.getHeight()+" width:"+graphicArea.getWidth();
+//        Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
+
+        isNextCurve = false;
+        curveNumber = 0;
+        currentPoints = new ArrayList<Point>();
 
         curvesList = database_handler.getAllCuves();
         if (curvesList.isEmpty()) {
@@ -86,17 +95,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 disableUi(false);
-                for (int iter = 0; iter < curvesList.size(); iter++) {
-                    Curve currentCurve = curvesList.get(iter);
 
-                    //Control Point
+                for (Curve currentCurve: curvesList) {
                     Point point = new Point((int) currentCurve.curveX, (int) currentCurve.curveY);
-                    drawControlPoint(point);
-
+                    currentPoints.add(point);
                     recursiveCCurve(currentCurve.curveN, currentCurve.curveLineLength, currentCurve.curveRotation, currentCurve.curveX, currentCurve.curveY, currentCurve.curveWidth, currentCurve.getColor());
-                    cubicBezierMultiCurve(graphicArea.getControlPoints());
+                    cubicBezierMultiCurve(currentPoints);
+                    currentPoints.clear();
                 }
-
 
                 disableUi(true);
             }
@@ -180,17 +186,17 @@ public class MainActivity extends AppCompatActivity {
             recursiveCCurve(iteration - 1, length, curveRotation - 45, x, y, curveWidth, curveColor);
         } else {
             //drawLine((int) x, (int) y, (int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))), curveWidth, curveColor);
-            Point point2 = new Point((int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))));
-            drawControlPoint(point2);
+            Point controlPoint = new Point((int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))));
+            currentPoints.add(controlPoint);
         }
     }
 
-    private void drawLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
-        graphicArea.drawLine(start_x, start_y, end_x, end_y, width, color);
+    private void addLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
+        graphicArea.addLine(start_x, start_y, end_x, end_y, width, color);
     }
 
-    private void drawControlPoint(Point point) {
-        graphicArea.addControlPoint(point);
+    private void addCurveControlPoints(List<Point> points) {
+        graphicArea.addControlPoint(points);
     }
 
 //    private void bezierPoints() {
@@ -232,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
 
         Point lastStartPoint = pointsList.get(pointsList.size() - 2);
         Point lastEndPoint = pointsList.get(pointsList.size() - 1);
-        List<Point> points_list = bezierCalc.bezierPoints(endPoint, lastEndPoint, lastStartPoint);
+        List<Point> points_list = bezierCalc.bezierPoints(startPoint, lastEndPoint, lastStartPoint);
         graphicArea.addSetOfBezierPoints(points_list);
     }
 
