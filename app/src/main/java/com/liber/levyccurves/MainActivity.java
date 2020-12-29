@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     drawControlPoint(point);
 
                     recursiveCCurve(currentCurve.curveN, currentCurve.curveLineLength, currentCurve.curveRotation, currentCurve.curveX, currentCurve.curveY, currentCurve.curveWidth, currentCurve.getColor());
-                    bezierPoints();
+                    cubicBezierMultiCurve(graphicArea.getControlPoints());
                 }
 
 
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         rndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generateRandoms(10);
+                generateRandomsCurves(10);
             }
         });
     }
@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int which) {
                 database_handler.clearCurves();
+                graphicArea.clear();
                 ToastMessage("All Cleared");
                 dialog.dismiss();
                 onResume();
@@ -192,19 +193,50 @@ public class MainActivity extends AppCompatActivity {
         graphicArea.addControlPoint(point);
     }
 
-    private void bezierPoints() {
+//    private void bezierPoints() {
+//        BezierCurve bezierCalc = new BezierCurve();
+//        List<Point> controlPoints = graphicArea.getControlPoints();
+//
+//        for(double step=0.0; step<=1; step+=0.01) {
+//            System.out.println(step);
+//
+////            Point newPoint = bezierCalc.quadraticBezierCurve(controlPoints.get(0), controlPoints.get(2), controlPoints.get(1), step);
+//            Point newPoint = bezierCalc.cubicBezierCurve(controlPoints.get(0), controlPoints.get(3), controlPoints.get(1), controlPoints.get(2), step);
+//
+//            graphicArea.addBezierPoint(newPoint);
+//        }
+//    }
+
+
+    public void cubicBezierMultiCurve (List<Point> pointsList) {
         BezierCurve bezierCalc = new BezierCurve();
-        List<Point> controlPoints = graphicArea.getControlPoints();
+        Point startPoint, endPoint, controlPoint;
+        double control_point_x, control_point_y;
 
-        for(double step=0.0; step<=1; step+=0.01) {
-            System.out.println(step);
+        startPoint = pointsList.get(0);
+        endPoint = pointsList.get(0);
 
-            Point newPoint = bezierCalc.quadraticBezierCurve(controlPoints.get(0), controlPoints.get(2), controlPoints.get(1), step);
-            graphicArea.addBezierPoint(newPoint);
+        for(int i=1; i<(pointsList.size()-2); i++) {
+
+            controlPoint = pointsList.get(i);
+            endPoint = pointsList.get(i + 1);
+
+            control_point_x = (controlPoint.x + endPoint.x)/2;
+            control_point_y = (controlPoint.y + endPoint.y)/2;
+            Point newEndPoint = new Point((int) control_point_x, (int) control_point_y);
+
+            List<Point> points_list = bezierCalc.bezierPoints(startPoint, newEndPoint, controlPoint);
+            graphicArea.addSetOfBezierPoints(points_list);
+            startPoint = newEndPoint;
         }
+
+        Point lastStartPoint = pointsList.get(pointsList.size() - 2);
+        Point lastEndPoint = pointsList.get(pointsList.size() - 1);
+        List<Point> points_list = bezierCalc.bezierPoints(endPoint, lastEndPoint, lastStartPoint);
+        graphicArea.addSetOfBezierPoints(points_list);
     }
 
-    private void generateRandoms(int number_of_curves) {
+    private void generateRandomsCurves(int number_of_curves) {
         database_handler = new DataBaseHandler(this);
 
         for(int i=0; i<number_of_curves; i++) {

@@ -103,6 +103,14 @@ public class DrawView extends View {
         postInvalidate();
     }
 
+    public void addSetOfBezierPoints(List<Point> points) {
+        for(Point point: points) {
+            bezierPoints.add(point);
+        }
+        isStateChanged = true;
+        postInvalidate();
+    }
+
     public void drawLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
         lines.add(new Line(start_x, start_y, end_x, end_y, width, color));
         isStateChanged = true;
@@ -116,6 +124,10 @@ public class DrawView extends View {
     }
 
     public void clear() {
+        lines.clear();
+        bezierPoints.clear();
+        controlPoints.clear();
+
         clearFlag = true;
         invalidate();
     }

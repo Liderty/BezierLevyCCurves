@@ -1,10 +1,9 @@
 package com.liber.levyccurves;
 
-public class BezierCurve {
-    Point cubicBezierCurve () {
-        return new Point();
-    }
+import java.util.ArrayList;
+import java.util.List;
 
+public class BezierCurve {
     public Point quadraticBezierCurve(Point start_point, Point end_point, Point control_point, double step_size) {
         Point newPoint = new Point();
 
@@ -21,6 +20,32 @@ public class BezierCurve {
         return newPoint;
     }
 
+    public Point cubicBezierCurve(Point start_point, Point end_point, Point control_point1, Point control_point2, double step_size) {
+        Point newPoint = new Point();
 
+        newPoint.x = (Math.pow(1 - step_size, 3)*start_point.x +
+                Math.pow(1 - step_size, 2)*3*step_size*control_point1.x +
+                (1 - step_size)*3*step_size*step_size*control_point2.x +
+                step_size*step_size*step_size*end_point.x);
+
+        newPoint.y = (Math.pow(1 - step_size, 3)*start_point.y +
+                Math.pow(1 - step_size, 2)*3*step_size*control_point1.y +
+                (1 - step_size)*3*step_size*step_size*control_point2.y +
+                step_size*step_size*step_size*end_point.y);
+
+        newPoint.print();
+        return newPoint;
+    }
+
+    public List<Point> bezierPoints(Point start_point, Point end_point, Point control_point) {
+        ArrayList<Point> drawPoints = new ArrayList<>();
+
+        for(double step=0.0; step<=1; step+=0.01) {
+            Point newPoint = quadraticBezierCurve(start_point, end_point, control_point, step);
+            drawPoints.add(newPoint);
+        }
+
+        return drawPoints;
+    }
 
 }

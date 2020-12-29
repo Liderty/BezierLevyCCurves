@@ -1,7 +1,7 @@
 package com.liber.levyccurves;
 
 public class Point {
-    double x,y;
+    double x, y;
 
     Point(Point p)
     {
