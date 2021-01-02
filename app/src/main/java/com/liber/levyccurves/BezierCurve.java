@@ -1,50 +1,30 @@
 package com.liber.levyccurves;
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BezierCurve {
-    public Point quadraticBezierCurve(Point start_point, Point end_point, Point control_point, double step_size) {
-        Point newPoint = new Point();
+    public List<Point> controlPoints;
+    public int curveWidth;
+    public String curveColor;
 
-        newPoint.x = (Math.pow(1 - step_size, 2)*start_point.x +
-                (1 - step_size)*2*step_size*control_point.x +
-                step_size*step_size*end_point.x);
+    BezierCurve(int width, String color) {
+        curveColor = color;
+        curveWidth = width;
+        controlPoints = new ArrayList<>();
+    };
 
-
-        newPoint.y = (Math.pow(1 - step_size, 2)*start_point.y +
-                (1 - step_size)*2*step_size*control_point.y +
-                step_size*step_size*end_point.y);
-
-        newPoint.print();
-        return newPoint;
+    public List<Point> getPoints() {
+        return controlPoints;
     }
 
-//    public Point cubicBezierCurve(Point start_point, Point end_point, Point control_point1, Point control_point2, double step_size) {
-//        Point newPoint = new Point();
-//
-//        newPoint.x = (Math.pow(1 - step_size, 3)*start_point.x +
-//                Math.pow(1 - step_size, 2)*3*step_size*control_point1.x +
-//                (1 - step_size)*3*step_size*step_size*control_point2.x +
-//                step_size*step_size*step_size*end_point.x);
-//
-//        newPoint.y = (Math.pow(1 - step_size, 3)*start_point.y +
-//                Math.pow(1 - step_size, 2)*3*step_size*control_point1.y +
-//                (1 - step_size)*3*step_size*step_size*control_point2.y +
-//                step_size*step_size*step_size*end_point.y);
-//
-//        newPoint.print();
-//        return newPoint;
-//    }
+    public void addPoint(Point point) {
+        controlPoints.add(point);
+    }
 
-    public List<Point> bezierPoints(Point start_point, Point end_point, Point control_point) {
-        ArrayList<Point> drawPoints = new ArrayList<>();
-
-        for(double step=0.0; step<=1; step+=0.01) {
-            Point newPoint = quadraticBezierCurve(start_point, end_point, control_point, step);
-            drawPoints.add(newPoint);
-        }
-
-        return drawPoints;
+    public int getColor() {
+        return Color.parseColor(curveColor);
     }
 }

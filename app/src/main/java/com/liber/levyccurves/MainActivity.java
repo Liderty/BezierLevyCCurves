@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Curve> curvesList;
 
     List<Point> currentPoints;
-    private boolean isNextCurve;
-    private int curveNumber;
+    int curveIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +62,13 @@ public class MainActivity extends AppCompatActivity {
         graphicArea.setBackgroundColor(Color.BLACK);
 
         // TODO: Add auto graphical area size limit
-//        String test = "height: "+graphicArea.getHeight()+" width:"+graphicArea.getWidth();
-//        Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
+        String test = "height: "+graphicArea.getHeight()+" width:"+graphicArea.getWidth();
+        Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
+        String midpoint = "MidPoint X:"+ graphicArea.getHeight()/2+" ";
+        String midpoint2 = "MidPoint Y:"+ graphicArea.getWidth()/2;
+        Toast.makeText(this, midpoint+midpoint2, Toast.LENGTH_SHORT).show();
 
-        isNextCurve = false;
-        curveNumber = 0;
+
         currentPoints = new ArrayList<Point>();
 
         curvesList = database_handler.getAllCuves();
@@ -95,13 +96,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 disableUi(false);
+                curveIndex = 0;
 
-                for (Curve currentCurve: curvesList) {
-                    Point point = new Point((int) currentCurve.curveX, (int) currentCurve.curveY);
+                for (Curve currentLevyCurve: curvesList) {
+                    Point point = new Point((int) currentLevyCurve.curveX, (int) currentLevyCurve.curveY);
+                    BezierCurve bezierCurve = new BezierCurve(currentLevyCurve.curveWidth, currentLevyCurve.curveColor);
+
+                    graphicArea.addBezierCurve(bezierCurve);
+                    graphicArea.addControlPoint(point);
                     currentPoints.add(point);
-                    recursiveCCurve(currentCurve.curveN, currentCurve.curveLineLength, currentCurve.curveRotation, currentCurve.curveX, currentCurve.curveY, currentCurve.curveWidth, currentCurve.getColor());
-                    cubicBezierMultiCurve(currentPoints);
+
+                    recursiveCCurve(currentLevyCurve.curveN, currentLevyCurve.curveLineLength,
+                            currentLevyCurve.curveRotation, currentLevyCurve.curveX,
+                            currentLevyCurve.curveY);
+
+                    cubicBezierMultiCurve(curveIndex, currentPoints);
                     currentPoints.clear();
+                    curveIndex++;
                 }
 
                 disableUi(true);
@@ -118,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         rndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generateRandomsCurves(10);
+                generateRandomsCurves(3);
             }
         });
     }
@@ -168,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         alert.show();
     }
 
-    private void recursiveCCurve(int curveN, double curveLength, int curveRotation, double curveX, double curveY, int curveWidth, int curveColor) {
+    private void recursiveCCurve(int curveN, double curveLength, int curveRotation, double curveX, double curveY) {
         double x = curveX;
         double y = curveY;
         double length = curveLength;
@@ -178,49 +189,24 @@ public class MainActivity extends AppCompatActivity {
         if (iteration > 0) {
             length = length / Math.sqrt(2);
 
-            recursiveCCurve(iteration - 1, length, curveRotation + 45, x, y, curveWidth, curveColor);
+            recursiveCCurve(iteration - 1, length, curveRotation + 45, x, y);
 
             x = x + (length * Math.cos(Math.toRadians(curveRotation + 45)));
             y = y + (length * Math.sin(Math.toRadians(curveRotation + 45)));
 
-            recursiveCCurve(iteration - 1, length, curveRotation - 45, x, y, curveWidth, curveColor);
+            recursiveCCurve(iteration - 1, length, curveRotation - 45, x, y);
         } else {
-            //drawLine((int) x, (int) y, (int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))), curveWidth, curveColor);
             Point controlPoint = new Point((int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))));
             currentPoints.add(controlPoint);
         }
     }
 
-    private void addLine(int start_x, int start_y, int end_x, int end_y, int width, int color) {
-        graphicArea.addLine(start_x, start_y, end_x, end_y, width, color);
-    }
-
-    private void addCurveControlPoints(List<Point> points) {
-        graphicArea.addControlPoint(points);
-    }
-
-//    private void bezierPoints() {
-//        BezierCurve bezierCalc = new BezierCurve();
-//        List<Point> controlPoints = graphicArea.getControlPoints();
-//
-//        for(double step=0.0; step<=1; step+=0.01) {
-//            System.out.println(step);
-//
-////            Point newPoint = bezierCalc.quadraticBezierCurve(controlPoints.get(0), controlPoints.get(2), controlPoints.get(1), step);
-//            Point newPoint = bezierCalc.cubicBezierCurve(controlPoints.get(0), controlPoints.get(3), controlPoints.get(1), controlPoints.get(2), step);
-//
-//            graphicArea.addBezierPoint(newPoint);
-//        }
-//    }
-
-
-    public void cubicBezierMultiCurve (List<Point> pointsList) {
-        BezierCurve bezierCalc = new BezierCurve();
+    public void cubicBezierMultiCurve (int curveIndex, List<Point> pointsList) {
+        BezierCurveCalculator bezierCalc = new BezierCurveCalculator();
         Point startPoint, endPoint, controlPoint;
         double control_point_x, control_point_y;
 
         startPoint = pointsList.get(0);
-        endPoint = pointsList.get(0);
 
         for(int i=1; i<(pointsList.size()-2); i++) {
 
@@ -232,14 +218,14 @@ public class MainActivity extends AppCompatActivity {
             Point newEndPoint = new Point((int) control_point_x, (int) control_point_y);
 
             List<Point> points_list = bezierCalc.bezierPoints(startPoint, newEndPoint, controlPoint);
-            graphicArea.addSetOfBezierPoints(points_list);
+            graphicArea.addSetOfBezierPoints(curveIndex, points_list);
             startPoint = newEndPoint;
         }
 
         Point lastStartPoint = pointsList.get(pointsList.size() - 2);
         Point lastEndPoint = pointsList.get(pointsList.size() - 1);
         List<Point> points_list = bezierCalc.bezierPoints(startPoint, lastEndPoint, lastStartPoint);
-        graphicArea.addSetOfBezierPoints(points_list);
+        graphicArea.addSetOfBezierPoints(curveIndex, points_list);
     }
 
     private void generateRandomsCurves(int number_of_curves) {
@@ -249,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
             Curve randomizedCurve = getRandomCurve();
             database_handler.addCurve(randomizedCurve);
         }
+
         onResume();
     }
 
