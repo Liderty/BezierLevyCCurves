@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +50,6 @@ public class CurvesListViewAdapter extends ArrayAdapter<Curve> {
             holder.curveColor = (LinearLayout) convertView.findViewById(R.id.curveColor);
 
             holder.btnEdit = (Button) convertView.findViewById(R.id.btnEdit);
-            holder.chbDraw = (CheckBox) convertView.findViewById(R.id.chbDraw);
 
             convertView.setTag(holder);
 
@@ -90,6 +88,5 @@ public class CurvesListViewAdapter extends ArrayAdapter<Curve> {
         private TextView curveLength;
         private TextView curveWidth;
         private LinearLayout curveColor;
-        private CheckBox chbDraw;
     }
 }

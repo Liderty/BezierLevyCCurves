@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class EditCurveActivity extends AppCompatActivity implements View.OnClickListener {

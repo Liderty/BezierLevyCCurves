@@ -20,7 +20,7 @@
     <dimen name="spinner_size">30dp</dimen>
     <dimen name="description_size">3</dimen>
 
-    <dimen name="color_picker_box_size">30dp</dimen>
+    <dimen name="color_picker_box_size">40dp</dimen>
 
 
 </resources>

@@ -21,216 +21,234 @@
                 android:text="@string/edit"
                 android:textColor="@color/colorDarkText"
                 android:textSize="@dimen/text_size_header"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_n"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation" />
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_n"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvN"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_get_n"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_rotation"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_rotation"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvRotation"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_get_rotation"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_x"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_x"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvX"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_get_x"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_y"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_y"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvY"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_get_y"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_line_length"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_line_length"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvLineLength"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_line_length"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_width"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_width"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvWidth"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_width"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="number" />
-
+                    android:inputType="number"
+                    android:textColorHint="@color/colorHintText" />
             </LinearLayout>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_color"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:weightSum="1.0"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:weightSum="1.0">
 
-                <EditText
-                    android:id="@+id/etvColor"
-                    android:layout_width="7dp"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:maxLength="7"
-                    android:layout_weight="0.4"
-                    android:hint="@string/hint_get_color"
-                    android:enabled="false"
-                    android:textColorHint="@color/colorHintText" />
+                    android:layout_weight="0.5"
+                    android:text="@string/get_color"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
-                <ImageView
-                    android:id="@+id/colorBox"
-                    android:layout_width="@dimen/color_picker_box_size"
-                    android:layout_height="@dimen/color_picker_box_size"
-                    android:layout_marginLeft="@dimen/margin_large"
-                    android:background="@color/black" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"
+                    android:weightSum="1.0">
 
+                    <EditText
+                        android:id="@+id/etvColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:enabled="false"
+                        android:hint="@string/hint_get_color"
+                        android:maxLength="7"
+                        android:textColorHint="@color/colorHintText" />
+
+                    <ImageView
+                        android:id="@+id/colorBox"
+                        android:layout_width="@dimen/color_picker_box_size"
+                        android:layout_height="@dimen/color_picker_box_size"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:background="@color/black" />
+                </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="0.9">
 
             <Button
                 android:id="@+id/btnCancel"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
+                android:layout_weight="0.3"
                 android:background="@drawable/rounded_button"
                 android:text="@string/cancel"
                 android:textColor="@color/colorBrightText" />
 
             <Button
                 android:id="@+id/btnRemove"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
+                android:layout_weight="0.3"
                 android:background="@drawable/rounded_button"
                 android:text="@string/remove"
                 android:textColor="@color/colorBrightText" />
 
             <Button
                 android:id="@+id/btnSave"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_medium"
+                android:layout_weight="0.3"
                 android:background="@drawable/rounded_button"
                 android:text="@string/save"
                 android:textColor="@color/colorBrightText" />
-
         </LinearLayout>
-
     </LinearLayout>
-
 </ScrollView>

@@ -23,204 +23,231 @@
                 android:textSize="@dimen/text_size_header"
                 android:textStyle="bold"/>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/get_n"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation" />
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_n"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
+
+                    <EditText
+                        android:id="@+id/etvN"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/hint_get_n"
+                        android:textColorHint="@color/colorHintText"
+                        android:inputType="number" />
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1.0">
 
-                <EditText
-                    android:id="@+id/etvN"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:hint="@string/hint_get_n"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="number" />
+                    android:layout_weight="0.5"
+                    android:text="@string/get_rotation"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation"/>
+
+
+                    <EditText
+                        android:id="@+id/etvRotation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.5"
+                        android:hint="@string/hint_get_rotation"
+                        android:textColorHint="@color/colorHintText"
+                        android:inputType="number" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_rotation"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
-
-                <EditText
-                    android:id="@+id/etvRotation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/hint_get_rotation"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="number" />
-
-            </LinearLayout>
+                android:orientation="horizontal"
+                android:weightSum="1.0">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:text="@string/get_x"
                 android:textColor="@color/colorDarkText"
                 android:textSize="@dimen/text_size_creation"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
-
                 <EditText
                     android:id="@+id/etvX"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_get_x"
                     android:textColorHint="@color/colorHintText"
                     android:inputType="numberDecimal" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/get_y"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/get_y"
+                android:textColor="@color/colorDarkText"
+                android:textSize="@dimen/text_size_creation"/>
 
                 <EditText
                     android:id="@+id/etvY"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_get_y"
                     android:textColorHint="@color/colorHintText"
                     android:inputType="numberDecimal" />
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:text="@string/get_line_length"
                 android:textColor="@color/colorDarkText"
                 android:textSize="@dimen/text_size_creation"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
 
                 <EditText
                     android:id="@+id/etvLineLength"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_line_length"
                     android:textColorHint="@color/colorHintText"
                     android:inputType="number" />
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:text="@string/get_width"
                 android:textColor="@color/colorDarkText"
                 android:textSize="@dimen/text_size_creation"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:orientation="vertical">
-
                 <EditText
                     android:id="@+id/etvWidth"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
                     android:hint="@string/hint_width"
                     android:textColorHint="@color/colorHintText"
                     android:inputType="number" />
 
             </LinearLayout>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1.0">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:text="@string/get_color"
                 android:textColor="@color/colorDarkText"
                 android:textSize="@dimen/text_size_creation"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:weightSum="1.0"
-                android:orientation="horizontal" >
-
-                <EditText
-                    android:id="@+id/etvColor"
-                    android:layout_width="7dp"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:maxLength="7"
-                    android:layout_weight="0.4"
-                    android:hint="@string/hint_get_color"
-                    android:enabled="false"
-                    android:textColorHint="@color/colorHintText" />
+                    android:layout_weight="0.5"
+                    android:layout_margin="@dimen/margin_medium"
+                    android:weightSum="1.0"
+                    android:orientation="horizontal" >
 
-                <ImageView
-                    android:id="@+id/colorBox"
-                    android:layout_width="@dimen/color_picker_box_size"
-                    android:layout_height="@dimen/color_picker_box_size"
-                    android:layout_marginLeft="@dimen/margin_large"
-                    android:background="@color/black" />
+                    <EditText
+                        android:id="@+id/etvColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.9"
+                        android:maxLength="7"
+                        android:hint="@string/hint_get_color"
+                        android:enabled="false"
+                        android:textColorHint="@color/colorHintText" />
 
+                    <ImageView
+                        android:id="@+id/colorBox"
+                        android:layout_width="@dimen/color_picker_box_size"
+                        android:layout_height="@dimen/color_picker_box_size"
+                        android:layout_marginLeft="@dimen/margin_large"
+                        android:background="@color/black" />
+
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_medium"
+                android:layout_weight="0.5"
+                android:background="@drawable/rounded_button"
+                android:text="@string/cancel"
+                android:textColor="@color/colorBrightText" />
 
             <Button
                 android:id="@+id/btnAdd"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
                 android:layout_margin="@dimen/margin_medium"
                 android:background="@drawable/rounded_button"
                 android:text="@string/done"
                 android:textColor="@color/colorBrightText" />
 
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_medium"
-                android:background="@drawable/rounded_button"
-                android:text="@string/cancel"
-                android:textColor="@color/colorBrightText" />
         </LinearLayout>
-
-
     </LinearLayout>
-
 </ScrollView>

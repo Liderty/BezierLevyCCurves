@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Levy C Curves</string>
+    <string name="app_name">Bezier Levy C Curves</string>
 
     <!-- Common use strings -->
     <string name="save">Save</string>
