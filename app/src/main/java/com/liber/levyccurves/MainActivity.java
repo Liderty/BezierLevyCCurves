@@ -1,16 +1,17 @@
 package com.liber.levyccurves;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
     static final int DEFAULT_LINE_MIN_ROTATION = 1;
     static final int DEFAULT_LINE_MAX_ROTATION = 360;
 
+    public static final String SHARED_PREFS = "mainSettings";
+    public static final String CP_DRAW_CHECKBOX = "cp_draw_checkbox";
+    public static final String CP_COLOR = "cp_color";
+    public static final String BG_COLOR = "bg_color";
+
     DataBaseHandler database_handler;
 
     private DrawView graphicArea;
@@ -35,10 +41,12 @@ public class MainActivity extends AppCompatActivity {
     private Button drawButton;
     private Button clearButton;
     private Button rndButton;
+    private Button setupButton;
     private ListView curvesListView;
     ArrayList<Curve> curvesList;
 
     List<Point> currentPoints;
+    private String SETTINGS_BACKGROUND_COLOR;
     int curveIndex;
 
     @Override
@@ -56,10 +64,13 @@ public class MainActivity extends AppCompatActivity {
         drawButton = (Button) findViewById(R.id.btnDraw);
         clearButton = (Button) findViewById(R.id.btnClear);
         rndButton = (Button) findViewById(R.id.btnRnd);
+        setupButton = (Button) findViewById(R.id.btnSetup);
         curvesListView = findViewById(R.id.curvesListView);
 
+        loadData();
+
         graphicArea = findViewById(R.id.drowableArea);
-        graphicArea.setBackgroundColor(Color.BLACK);
+        graphicArea.setBackgroundColor(Color.parseColor(SETTINGS_BACKGROUND_COLOR));
 
         // TODO: Add auto graphical area size limit
         String test = "height: "+graphicArea.getHeight()+" width:"+graphicArea.getWidth();
@@ -84,11 +95,17 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         curvesListView.setAdapter(adapter);
 
-
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 OpenAddActivity();
+            }
+        });
+
+        setupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenSetupActivity();
             }
         });
 
@@ -144,6 +161,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void OpenAddActivity() {
         Intent intent = new Intent(this, AddCurveActivity.class);
+        startActivity(intent);
+    }
+
+    private void OpenSetupActivity() {
+        Intent intent = new Intent(this, SetupActivity.class);
         startActivity(intent);
     }
 
@@ -250,5 +272,10 @@ public class MainActivity extends AppCompatActivity {
 
         Curve randromCurve = new Curve(randomN, randomRotation, randomX, randomY, randomLineLength, randomWidth, randomColor);
         return randromCurve;
+    }
+
+    public void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SETTINGS_BACKGROUND_COLOR = sharedPreferences.getString(BG_COLOR, "#000000");
     }
 }

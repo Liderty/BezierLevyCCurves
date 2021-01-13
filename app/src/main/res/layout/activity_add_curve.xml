@@ -21,7 +21,7 @@
                 android:text="@string/add"
                 android:textColor="@color/colorDarkText"
                 android:textSize="@dimen/text_size_header"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,16 +37,15 @@
                     android:textColor="@color/colorDarkText"
                     android:textSize="@dimen/text_size_creation" />
 
-                    <EditText
-                        android:id="@+id/etvN"
-                        android:layout_width="0dp"
-                        android:layout_weight="0.5"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/hint_get_n"
-                        android:textColorHint="@color/colorHintText"
-                        android:inputType="number" />
+                <EditText
+                    android:id="@+id/etvN"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="@string/hint_get_n"
+                    android:inputType="number"
+                    android:textColorHint="@color/colorHintText" />
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -61,17 +60,17 @@
                     android:layout_weight="0.5"
                     android:text="@string/get_rotation"
                     android:textColor="@color/colorDarkText"
-                    android:textSize="@dimen/text_size_creation"/>
+                    android:textSize="@dimen/text_size_creation" />
 
 
-                    <EditText
-                        android:id="@+id/etvRotation"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:hint="@string/hint_get_rotation"
-                        android:textColorHint="@color/colorHintText"
-                        android:inputType="number" />
+                <EditText
+                    android:id="@+id/etvRotation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:hint="@string/hint_get_rotation"
+                    android:inputType="number"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
 
@@ -82,13 +81,13 @@
                 android:orientation="horizontal"
                 android:weightSum="1.0">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="@string/get_x"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_x"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvX"
@@ -96,8 +95,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:hint="@string/hint_get_x"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
 
@@ -108,13 +107,13 @@
                 android:orientation="horizontal"
                 android:weightSum="1.0">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="@string/get_y"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_y"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvY"
@@ -122,8 +121,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:hint="@string/hint_get_y"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="numberDecimal" />
+                    android:inputType="numberDecimal"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
 
@@ -133,13 +132,13 @@
                 android:orientation="horizontal"
                 android:weightSum="1.0">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="@string/get_line_length"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_line_length"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
 
                 <EditText
@@ -148,8 +147,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:hint="@string/hint_line_length"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
 
@@ -159,13 +158,13 @@
                 android:orientation="horizontal"
                 android:weightSum="1.0">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="@string/get_width"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_width"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <EditText
                     android:id="@+id/etvWidth"
@@ -173,8 +172,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:hint="@string/hint_width"
-                    android:textColorHint="@color/colorHintText"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColorHint="@color/colorHintText" />
 
             </LinearLayout>
 
@@ -184,30 +183,30 @@
                 android:orientation="horizontal"
                 android:weightSum="1.0">
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:text="@string/get_color"
-                android:textColor="@color/colorDarkText"
-                android:textSize="@dimen/text_size_creation"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.5"
+                    android:text="@string/get_color"
+                    android:textColor="@color/colorDarkText"
+                    android:textSize="@dimen/text_size_creation" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
                     android:layout_margin="@dimen/margin_medium"
-                    android:weightSum="1.0"
-                    android:orientation="horizontal" >
+                    android:layout_weight="0.5"
+                    android:orientation="horizontal"
+                    android:weightSum="1.0">
 
                     <EditText
                         android:id="@+id/etvColor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="0.9"
-                        android:maxLength="7"
-                        android:hint="@string/hint_get_color"
                         android:enabled="false"
+                        android:hint="@string/hint_get_color"
+                        android:maxLength="7"
                         android:textColorHint="@color/colorHintText" />
 
                     <ImageView
@@ -219,7 +218,6 @@
 
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -242,8 +240,8 @@
                 android:id="@+id/btnAdd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
                 android:layout_margin="@dimen/margin_medium"
+                android:layout_weight="0.5"
                 android:background="@drawable/rounded_button"
                 android:text="@string/done"
                 android:textColor="@color/colorBrightText" />

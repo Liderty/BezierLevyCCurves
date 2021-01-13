@@ -28,6 +28,15 @@
     <string name="hint_width">Set line width</string>
     <string name="none">None</string>
 
+    <!-- Settings -->
+    <string name="main_section_title">Main Settings</string>
+    <string name="main_get_color">Background Color</string>
+
+    <string name="cp_section_title">Control Points</string>
+    <string name="cp_draw">Draw Control Points</string>
+    <string name="cp_get_color">Control Point Color</string>
+
+
     <!-- Curve listview row info -->
     <string name="curve_id">Id</string>
     <string name="curve_n">N</string>

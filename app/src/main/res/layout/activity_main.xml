@@ -25,52 +25,96 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/buttonsArea"
-        android:layout_margin="@dimen/margin_medium"
+        android:id="@+id/buttonsMainArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="1.0">
+        android:weightSum="1.1">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/space_buttons" />
 
         <Button
             android:id="@+id/btnDraw"
             android:text="Draw"
-            android:layout_weight="0.25"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_width="wrap_content"
+            android:layout_weight="0.79"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/space_buttons" />
+
+        <Button
+            android:id="@+id/btnSetup"
+            android:text="Setup"
+            android:layout_weight="0.25"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/space_buttons" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonsCurvesArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.1">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/space_buttons" />
 
         <Button
             android:id="@+id/btnAdd"
             android:text="Add"
-            android:layout_weight="0.25"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_width="wrap_content"
+            android:layout_weight="0.52"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/space_buttons" />
 
         <Button
             android:id="@+id/btnClear"
             android:text="Clear"
             android:layout_weight="0.25"
-            android:layout_marginRight="@dimen/margin_small"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/space_buttons" />
 
         <Button
             android:id="@+id/btnRnd"
             android:text="10Rnd"
             android:layout_weight="0.25"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="@dimen/space_buttons" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/listViewArea"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_medium">
+        android:layout_height="wrap_content">
 
         <ListView
             android:id="@+id/curvesListView"

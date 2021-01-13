@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding_medium"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/main_section_title"
+        android:gravity="center"
+        android:textColor="@color/colorDarkText"
+        android:textSize="@dimen/text_size_creation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/main_get_color"
+            android:textColor="@color/colorDarkText"
+            android:textSize="@dimen/text_size_creation" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:layout_weight="0.5"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <EditText
+                android:id="@+id/etvBgColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:enabled="false"
+                android:hint="@string/hint_get_color"
+                android:maxLength="7"
+                android:textColorHint="@color/colorHintText" />
+
+            <ImageView
+                android:id="@+id/bgColorBox"
+                android:layout_width="@dimen/color_picker_box_size"
+                android:layout_height="@dimen/color_picker_box_size"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:background="@color/black" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_line"
+        android:background="@color/cardview_light_background"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cp_section_title"
+            android:gravity="center"
+            android:textColor="@color/colorDarkText"
+            android:textSize="@dimen/text_size_creation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/cp_draw"
+            android:textColor="@color/colorDarkText"
+            android:textSize="@dimen/text_size_creation" />
+
+        <CheckBox
+            android:id="@+id/checkboxShowControlPoints"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/cp_get_color"
+            android:textColor="@color/colorDarkText"
+            android:textSize="@dimen/text_size_creation" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:layout_weight="0.5"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <EditText
+                android:id="@+id/etvCPColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9"
+                android:enabled="false"
+                android:hint="@string/hint_get_color"
+                android:maxLength="7"
+                android:textColorHint="@color/colorHintText" />
+
+            <ImageView
+                android:id="@+id/cpColorBox"
+                android:layout_width="@dimen/color_picker_box_size"
+                android:layout_height="@dimen/color_picker_box_size"
+                android:layout_marginLeft="@dimen/margin_large"
+                android:background="@color/black" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Buttons Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_medium"
+            android:layout_weight="0.5"
+            android:background="@drawable/rounded_button"
+            android:text="@string/cancel"
+            android:textColor="@color/colorBrightText" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_margin="@dimen/margin_medium"
+            android:background="@drawable/rounded_button"
+            android:text="@string/save"
+            android:textColor="@color/colorBrightText" />
+
+    </LinearLayout>
+</LinearLayout>
