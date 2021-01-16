@@ -19,13 +19,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     static final int DEFAULT_LINE_MIN_ITERATIONS = 1;
-    static final int DEFAULT_LINE_MAX_ITERATIONS = 14;
+    static final int DEFAULT_LINE_MAX_ITERATIONS = 10;
     static final int DEFAULT_LINE_MIN_WIDTH = 1;
     static final int DEFAULT_LINE_MAX_WIDTH = 25;
     static final int DEFAULT_LINE_MIN_LENGTH = 50;
     static final int DEFAULT_LINE_MAX_LENGTH = 500;
-    static final int DEFAULT_LINE_MIN_XY_COORDINATE = 1;
-    static final int DEFAULT_LINE_MAX_XY_COORDINATE = 1000;
+    static final int DEFAULT_LINE_MIN_XY_COORDINATE = -250;
+    static final int DEFAULT_LINE_MAX_XY_COORDINATE = 250;
     static final int DEFAULT_LINE_MIN_ROTATION = 1;
     static final int DEFAULT_LINE_MAX_ROTATION = 360;
 
@@ -33,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String CP_DRAW_CHECKBOX = "cp_draw_checkbox";
     public static final String CP_COLOR = "cp_color";
     public static final String BG_COLOR = "bg_color";
+    public static final String SP_MIDDLE_POINT_X = "mid_point_x";
+    public static final String SP_MIDDLE_POINT_Y = "mid_point_y";
 
-    DataBaseHandler database_handler;
+    private DataBaseHandler database_handler;
 
     private DrawView graphicArea;
     private Button addButton;
@@ -43,11 +45,13 @@ public class MainActivity extends AppCompatActivity {
     private Button rndButton;
     private Button setupButton;
     private ListView curvesListView;
-    ArrayList<Curve> curvesList;
+    private ArrayList<Curve> curvesList;
 
-    List<Point> currentPoints;
-    private String SETTINGS_BACKGROUND_COLOR;
-    int curveIndex;
+    private List<Point> currentPoints;
+    private String settings_background_color;
+    private int mid_point_x;
+    private int mid_point_y;
+    private int curveIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,18 +71,10 @@ public class MainActivity extends AppCompatActivity {
         setupButton = (Button) findViewById(R.id.btnSetup);
         curvesListView = findViewById(R.id.curvesListView);
 
-        loadData();
+        updateSettingsData();
 
         graphicArea = findViewById(R.id.drowableArea);
-        graphicArea.setBackgroundColor(Color.parseColor(SETTINGS_BACKGROUND_COLOR));
-
-        // TODO: Add auto graphical area size limit
-        String test = "height: "+graphicArea.getHeight()+" width:"+graphicArea.getWidth();
-        Toast.makeText(this, test, Toast.LENGTH_SHORT).show();
-        String midpoint = "MidPoint X:"+ graphicArea.getHeight()/2+" ";
-        String midpoint2 = "MidPoint Y:"+ graphicArea.getWidth()/2;
-        Toast.makeText(this, midpoint+midpoint2, Toast.LENGTH_SHORT).show();
-
+        graphicArea.setBackgroundColor(Color.parseColor(settings_background_color));
 
         currentPoints = new ArrayList<Point>();
 
@@ -113,19 +109,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 disableUi(false);
+                clearDrawArea();
                 curveIndex = 0;
 
+
+                saveMiddlePoint();
+
                 for (Curve currentLevyCurve: curvesList) {
-                    Point point = new Point((int) currentLevyCurve.curveX, (int) currentLevyCurve.curveY);
+                    Point startPoint = new Point(mid_point_x + (int) currentLevyCurve.curveX,mid_point_y + -((int) currentLevyCurve.curveY));
                     BezierCurve bezierCurve = new BezierCurve(currentLevyCurve.curveWidth, currentLevyCurve.curveColor);
 
                     graphicArea.addBezierCurve(bezierCurve);
-                    graphicArea.addControlPoint(point);
-                    currentPoints.add(point);
+                    //graphicArea.addControlPoint(middlePoint);
+                    currentPoints.add(startPoint);
 
                     recursiveCCurve(currentLevyCurve.curveN, currentLevyCurve.curveLineLength,
-                            currentLevyCurve.curveRotation, currentLevyCurve.curveX,
-                            currentLevyCurve.curveY);
+                            currentLevyCurve.curveRotation, startPoint.x,
+                            startPoint.y);
 
                     cubicBezierMultiCurve(curveIndex, currentPoints);
                     currentPoints.clear();
@@ -152,11 +152,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void disableUi (boolean enabled) {
-        curvesListView.setEnabled(enabled);
-        clearButton.setEnabled(enabled);
-        rndButton.setEnabled(enabled);
-        drawButton.setEnabled(enabled);
-        addButton.setEnabled(enabled);
+        if(enabled){
+            curvesListView.setEnabled(true);
+            clearButton.setEnabled(true);
+            rndButton.setEnabled(true);
+            drawButton.setEnabled(true);
+            addButton.setEnabled(true);
+        } else {
+            curvesListView.setEnabled(false);
+            clearButton.setEnabled(false);
+            rndButton.setEnabled(false);
+            drawButton.setEnabled(false);
+            addButton.setEnabled(false);
+        }
     }
 
     private void OpenAddActivity() {
@@ -274,8 +282,28 @@ public class MainActivity extends AppCompatActivity {
         return randromCurve;
     }
 
-    public void loadData() {
+    public void updateSettingsData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        SETTINGS_BACKGROUND_COLOR = sharedPreferences.getString(BG_COLOR, "#000000");
+        settings_background_color = sharedPreferences.getString(BG_COLOR, "#000000");
+        mid_point_x = sharedPreferences.getInt(SP_MIDDLE_POINT_X, 0);
+        mid_point_y = sharedPreferences.getInt(SP_MIDDLE_POINT_Y, 0);
+    }
+
+    public void saveMiddlePoint() {
+
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt(SP_MIDDLE_POINT_X, graphicArea.getWidth()/2);
+        editor.putInt(SP_MIDDLE_POINT_Y, graphicArea.getHeight()/2);
+        editor.apply();
+
+        updateSettingsData();
+    }
+
+    private void clearDrawArea() {
+        graphicArea.setBackgroundColor(Color.parseColor(settings_background_color));
+        graphicArea.clear();
+        currentPoints.clear();
     }
 }

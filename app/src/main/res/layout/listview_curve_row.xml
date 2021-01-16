@@ -98,7 +98,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/curve_y"
+                android:text="@string/curve_x"
                 android:textAlignment="center"
                 android:textSize="@dimen/text_size_row"
                 android:gravity="center_horizontal" />
