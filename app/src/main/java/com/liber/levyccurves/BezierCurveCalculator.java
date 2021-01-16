@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BezierCurveCalculator {
+    float curvesResolution;
+
+    BezierCurveCalculator(float resolution){
+        curvesResolution = resolution;
+    }
+
     public Point quadraticBezierCurve(Point start_point, Point end_point, Point control_point, double step_size) {
         Point newPoint = new Point();
 
@@ -21,7 +27,7 @@ public class BezierCurveCalculator {
     public List<Point> bezierPoints(Point start_point, Point end_point, Point control_point) {
         ArrayList<Point> drawPoints = new ArrayList<>();
 
-        for(double step=0.0; step<=1; step+=0.1) {
+        for(double step=0.0; step<=1; step+=curvesResolution) {
             Point newPoint = quadraticBezierCurve(start_point, end_point, control_point, step);
             drawPoints.add(newPoint);
         }

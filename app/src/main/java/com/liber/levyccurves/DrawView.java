@@ -2,6 +2,7 @@ package com.liber.levyccurves;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
@@ -19,6 +20,8 @@ public class DrawView extends androidx.appcompat.widget.AppCompatImageView {
 
     private boolean isStateChanged = false;
     private boolean clearFlag = false;
+
+    private String control_points_color = "#FF0000";
 
     private void init() {
         paint = new Paint();
@@ -55,7 +58,7 @@ public class DrawView extends androidx.appcompat.widget.AppCompatImageView {
             clearFlag = false;
         } else if(isStateChanged) {
             drawCurves(canvas);
-
+            drawControlPoints(canvas);
             isStateChanged = false;
         }
     }
@@ -96,13 +99,17 @@ public class DrawView extends androidx.appcompat.widget.AppCompatImageView {
 
     public void drawControlPoints(Canvas canvas) {
         for (Point controlPoint : controlPoints) {
-//            paint.setColor();
+            paint.setColor(Color.parseColor(control_points_color));
             canvas.drawCircle((float) controlPoint.x, (float) controlPoint.y, DEFAULT_CONTROL_POINT_SIZE, paint);
         }
     }
 
     public void drawPoint(Canvas canvas, double x, double y, int point_size) {
         canvas.drawCircle((float) x, (float) y, point_size/2, paint);
+    }
+
+    public void setControlPointsColor(String color) {
+        control_points_color = color;
     }
 
     public void clear() {

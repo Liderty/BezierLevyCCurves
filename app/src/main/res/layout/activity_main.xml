@@ -99,7 +99,7 @@
 
         <Button
             android:id="@+id/btnRnd"
-            android:text="10Rnd"
+            android:text="@string/rnd"
             android:layout_weight="0.25"
             android:layout_width="0dp"
             android:layout_height="wrap_content"/>

@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String BG_COLOR = "bg_color";
     public static final String SP_MIDDLE_POINT_X = "mid_point_x";
     public static final String SP_MIDDLE_POINT_Y = "mid_point_y";
+    public static final String RESOLUTION = "resolution";
+    public static final String RND_AMOUNT = "cp_amount";
 
     private DataBaseHandler database_handler;
 
@@ -49,9 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Point> currentPoints;
     private String settings_background_color;
+    private String control_points_color;
+    private boolean isCPDrawEnabled;
     private int mid_point_x;
     private int mid_point_y;
     private int curveIndex;
+    private int rndAmount;
+    private float curvesResolution;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,16 +117,16 @@ public class MainActivity extends AppCompatActivity {
                 disableUi(false);
                 clearDrawArea();
                 curveIndex = 0;
-
-
                 saveMiddlePoint();
+                if(isCPDrawEnabled) graphicArea.setControlPointsColor(control_points_color);
+
 
                 for (Curve currentLevyCurve: curvesList) {
                     Point startPoint = new Point(mid_point_x + (int) currentLevyCurve.curveX,mid_point_y + -((int) currentLevyCurve.curveY));
                     BezierCurve bezierCurve = new BezierCurve(currentLevyCurve.curveWidth, currentLevyCurve.curveColor);
 
                     graphicArea.addBezierCurve(bezierCurve);
-                    //graphicArea.addControlPoint(middlePoint);
+                    if(isCPDrawEnabled) graphicArea.addControlPoint(startPoint);
                     currentPoints.add(startPoint);
 
                     recursiveCCurve(currentLevyCurve.curveN, currentLevyCurve.curveLineLength,
@@ -146,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         rndButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                generateRandomsCurves(3);
+                generateRandomsCurves();
             }
         });
     }
@@ -227,12 +233,13 @@ public class MainActivity extends AppCompatActivity {
             recursiveCCurve(iteration - 1, length, curveRotation - 45, x, y);
         } else {
             Point controlPoint = new Point((int) (x + (length * Math.cos(Math.toRadians(curveRotation)))), (int) (y + (length * Math.sin(Math.toRadians(curveRotation)))));
+            if(isCPDrawEnabled) graphicArea.addControlPoint(controlPoint);
             currentPoints.add(controlPoint);
         }
     }
 
     public void cubicBezierMultiCurve (int curveIndex, List<Point> pointsList) {
-        BezierCurveCalculator bezierCalc = new BezierCurveCalculator();
+        BezierCurveCalculator bezierCalc = new BezierCurveCalculator(curvesResolution);
         Point startPoint, endPoint, controlPoint;
         double control_point_x, control_point_y;
 
@@ -258,10 +265,10 @@ public class MainActivity extends AppCompatActivity {
         graphicArea.addSetOfBezierPoints(curveIndex, points_list);
     }
 
-    private void generateRandomsCurves(int number_of_curves) {
+    private void generateRandomsCurves() {
         database_handler = new DataBaseHandler(this);
 
-        for(int i=0; i<number_of_curves; i++) {
+        for(int i=0; i<rndAmount; i++) {
             Curve randomizedCurve = getRandomCurve();
             database_handler.addCurve(randomizedCurve);
         }
@@ -287,6 +294,10 @@ public class MainActivity extends AppCompatActivity {
         settings_background_color = sharedPreferences.getString(BG_COLOR, "#000000");
         mid_point_x = sharedPreferences.getInt(SP_MIDDLE_POINT_X, 0);
         mid_point_y = sharedPreferences.getInt(SP_MIDDLE_POINT_Y, 0);
+        curvesResolution = sharedPreferences.getFloat(RESOLUTION, 0.1f);
+        rndAmount = sharedPreferences.getInt(RND_AMOUNT, 10);
+        isCPDrawEnabled = sharedPreferences.getBoolean(CP_DRAW_CHECKBOX, false);
+        control_points_color = sharedPreferences.getString(CP_COLOR, "#440000");
     }
 
     public void saveMiddlePoint() {

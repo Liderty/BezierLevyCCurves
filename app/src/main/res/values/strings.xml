@@ -9,6 +9,7 @@
     <string name="edit">Edit</string>
     <string name="add">Add Curve</string>
     <string name="remove">Remove</string>
+    <string name="rnd">Rnd</string>
 
     <!-- Edit page strings -->
     <string name="get_color">Color</string>
@@ -31,11 +32,16 @@
     <!-- Settings -->
     <string name="main_section_title">Main Settings</string>
     <string name="main_get_color">Background Color</string>
+    <string name="main_resolution">Resolution</string>
+    <string name="hint_main_resolution">Number of Control Points</string>
 
     <string name="cp_section_title">Control Points</string>
     <string name="cp_draw">Draw Control Points</string>
     <string name="cp_get_color">Control Point Color</string>
 
+    <string name="rnd_section_title">Randomizer</string>
+    <string name="rnd_amount">Amount</string>
+    <string name="hint_rnd_amount">How many curves</string>
 
     <!-- Curve listview row info -->
     <string name="curve_id">Id</string>

@@ -2,16 +2,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding_medium"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/padding_medium">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/main_section_title"
         android:gravity="center"
+        android:text="@string/main_section_title"
         android:textColor="@color/colorDarkText"
         android:textSize="@dimen/text_size_creation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/main_resolution"
+            android:textColor="@color/colorDarkText"
+            android:textSize="@dimen/text_size_creation" />
+
+        <EditText
+            android:id="@+id/etvResolution"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:inputType="numberDecimal"
+            android:hint="@string/hint_main_resolution"
+            android:textColorHint="@color/colorHintText" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,15 +83,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/space_line"
-        android:background="@color/cardview_light_background"/>
+        android:background="@color/cardview_light_background" />
 
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cp_section_title"
-            android:gravity="center"
-            android:textColor="@color/colorDarkText"
-            android:textSize="@dimen/text_size_creation" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/cp_section_title"
+        android:textColor="@color/colorDarkText"
+        android:textSize="@dimen/text_size_creation" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,8 +110,8 @@
         <CheckBox
             android:id="@+id/checkboxShowControlPoints"
             android:layout_width="0dp"
-            android:layout_weight="0.5"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" />
     </LinearLayout>
 
     <LinearLayout
@@ -131,6 +156,45 @@
         </LinearLayout>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_line"
+        android:background="@color/cardview_light_background" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/rnd_section_title"
+        android:textColor="@color/colorDarkText"
+        android:textSize="@dimen/text_size_creation" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1.0">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="@string/rnd_amount"
+            android:textColor="@color/colorDarkText"
+            android:textSize="@dimen/text_size_creation" />
+
+        <EditText
+            android:id="@+id/etvRndAmount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:inputType="number"
+            android:hint="@string/hint_rnd_amount"
+            android:textColorHint="@color/colorHintText" />
+
+    </LinearLayout>
+
+
     <!-- Buttons Section -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -152,8 +216,8 @@
             android:id="@+id/btnSave"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
             android:layout_margin="@dimen/margin_medium"
+            android:layout_weight="0.5"
             android:background="@drawable/rounded_button"
             android:text="@string/save"
             android:textColor="@color/colorBrightText" />
