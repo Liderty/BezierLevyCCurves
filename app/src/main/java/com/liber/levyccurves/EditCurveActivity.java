@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class EditCurveActivity extends AppCompatActivity implements View.OnClickListener {
@@ -80,9 +81,10 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnSave:
-                saveEdition(curveId);
-                Toast.makeText(this, "Edited", Toast.LENGTH_SHORT).show();
-                finish();
+                if (saveEdition(curveId)) {
+                    Toast.makeText(this, "Edited", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
                 break;
             case R.id.btnCancel:
                 Toast.makeText(this, "Canceled", Toast.LENGTH_SHORT).show();
@@ -102,6 +104,7 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
             }
+
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 currentColor = color;
@@ -123,7 +126,7 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
             public void onClick(DialogInterface dialog, int which) {
                 DataBaseHandler database_handler = new DataBaseHandler(context);
                 database_handler.deleteCurve(editedCurve.getId());
-                Toast.makeText(context, "Successfuly Deleted"+String.valueOf(editedCurve.getId()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Successfuly Deleted" + String.valueOf(editedCurve.getId()), Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
                 finish();
             }
@@ -141,17 +144,34 @@ public class EditCurveActivity extends AppCompatActivity implements View.OnClick
         alert.show();
     }
 
-    private void saveEdition(int curveId) {
-        int editedN = Integer.parseInt(String.valueOf(fieldN.getText()));
-        int editedRotation = (int) Double.parseDouble(String.valueOf(fieldRotation.getText()));
-        double editedX = Double.parseDouble(String.valueOf(fieldX.getText()));
-        double editedY = Double.parseDouble(String.valueOf(fieldY.getText()));
-        int editedLineLength = Integer.parseInt(String.valueOf(fieldLineLength.getText()));
-        int editedWidth = Integer.parseInt(String.valueOf(fieldWidth.getText()));
-        String editedColor = (String.valueOf(fieldColor.getText()));
+    private boolean isDataCompleted() {
+        if (String.valueOf(fieldN.getText()).isEmpty() ||
+                String.valueOf(fieldRotation.getText()).isEmpty() ||
+                String.valueOf(fieldX.getText()).isEmpty() ||
+                String.valueOf(fieldY.getText()).isEmpty() ||
+                String.valueOf(fieldLineLength.getText()).isEmpty() ||
+                String.valueOf(fieldWidth.getText()).isEmpty()) {
+            return false;
+        } else return true;
+    }
 
-        Curve editedCurve = new Curve(editedN, editedRotation, editedX, editedY, editedLineLength, editedWidth, editedColor);
-        System.out.println("CURVE READY");
-        database_handler.updateCurve(curveId, editedCurve);
+    private boolean saveEdition(int curveId) {
+        if (isDataCompleted()) {
+            int editedN = Integer.parseInt(String.valueOf(fieldN.getText()));
+            int editedRotation = (int) Double.parseDouble(String.valueOf(fieldRotation.getText()));
+            double editedX = Double.parseDouble(String.valueOf(fieldX.getText()));
+            double editedY = Double.parseDouble(String.valueOf(fieldY.getText()));
+            int editedLineLength = Integer.parseInt(String.valueOf(fieldLineLength.getText()));
+            int editedWidth = Integer.parseInt(String.valueOf(fieldWidth.getText()));
+            String editedColor = (String.valueOf(fieldColor.getText()));
+
+            Curve editedCurve = new Curve(editedN, editedRotation, editedX, editedY, editedLineLength, editedWidth, editedColor);
+            System.out.println("CURVE READY");
+            database_handler.updateCurve(curveId, editedCurve);
+            return true;
+        } else {
+            Toast.makeText(context, "Fill Data!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
     }
 }

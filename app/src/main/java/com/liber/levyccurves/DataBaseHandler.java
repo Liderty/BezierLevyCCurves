@@ -90,38 +90,19 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     public void updateCurve(int curve_id, Curve editedCurve) {
         SQLiteDatabase db = getWritableDatabase();
         String TAG = "UPDATE";
-        String query = "SELECT * FROM "+TABLE_CURVES+" WHERE ("+KEY_CURVE_ID+"=="+curve_id+")";
-        Cursor cursor = db.rawQuery(query, null);
-        db.beginTransaction();
+        ContentValues cv = new ContentValues();
 
-        System.out.println("DATABASE OPENED");
-        try {
-            if (cursor.moveToFirst()) {
-                do {
-                    ContentValues cv = new ContentValues();
+        cv.put(KEY_CURVE_N, editedCurve.curveN);
+        cv.put(KEY_CURVE_X, editedCurve.curveX);
+        cv.put(KEY_CURVE_Y, editedCurve.curveY);
+        cv.put(KEY_CURVE_ROTATION, editedCurve.curveRotation);
+        cv.put(KEY_CURVE_LINE_LENGTH, editedCurve.curveLineLength);
+        cv.put(KEY_CURVE_WIDTH, editedCurve.curveWidth);
+        cv.put(KEY_CURVE_COLOR, editedCurve.curveColor);
 
-                    cv.put(KEY_CURVE_N, editedCurve.curveN);
-                    cv.put(KEY_CURVE_ROTATION, editedCurve.curveRotation);
-                    cv.put(KEY_CURVE_X, editedCurve.curveX);
-                    cv.put(KEY_CURVE_Y, editedCurve.curveY);
-                    cv.put(KEY_CURVE_LINE_LENGTH, editedCurve.curveLineLength);
-                    cv.put(KEY_CURVE_WIDTH, editedCurve.curveWidth);
-                    cv.put(KEY_CURVE_COLOR, editedCurve.curveColor);
+        db.update(TABLE_CURVES, cv, "ID = ?", new String[]{Integer.toString(curve_id)});
 
-                    System.out.println("DATABASE PREQUERRY");
-                    db.update(TABLE_CURVES, cv, "("+KEY_CURVE_ID+"=="+curve_id+")",null);
-                    System.out.println("DATABASE PREQUERRY");
-                } while(cursor.moveToNext());
-            }
-        } catch (Exception e) {
-            Log.d(TAG, "Error while updating curve");
-            System.out.println("TESTING WAY");
-        } finally {
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
-            }
-            db.close();
-        }
+
     }
 
     public ArrayList<Curve> getAllCuves() {
